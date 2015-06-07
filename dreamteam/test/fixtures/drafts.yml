@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  draft_year: 1
+  draft_round: 1
+  selection: 1
+  team: MyString
+  first_name: MyString
+  last_name: MyString
+  player_code: MyString
+  drafted_from: MyString
+  league: MyString
+
+two:
+  draft_year: 1
+  draft_round: 1
+  selection: 1
+  team: MyString
+  first_name: MyString
+  last_name: MyString
+  player_code: MyString
+  drafted_from: MyString
+  league: MyString

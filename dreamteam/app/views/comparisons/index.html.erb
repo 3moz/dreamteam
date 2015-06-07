@@ -1,0 +1,16 @@
+<h1>All Saved Comparisons</h1>
+
+<div id='compList'>
+
+<ul>
+  <%= @comparisons.each do |comp| %>
+  
+    <li>
+      <%= comp.search %>
+    </li>
+
+  <%end%>
+  
+</ul>
+
+</div>

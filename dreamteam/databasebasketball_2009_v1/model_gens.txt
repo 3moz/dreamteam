@@ -1,0 +1,17 @@
+
+
+rails g model PlayerRegSeason player_code:string year:integer first_name:string last_name:string team:string league:string gp:integer minutes:integer pts:integer oreb:integer dreb:integer reb:integer asts:integer blk:integer turnover:integer pf:integer fga:integer fgm:integer fta:integer ftm:integer tpa:integer tpm:integer
+
+rails g model PlayerPlayoffsCareer player_code:string first_name:string last_name:string player_league:string gp:integer minutes:integer drb:integer ore:integer reb:integer asts:integer stl:integer blk:integer turnover:integer pf:integer fga:integer fgm:integer fta:integer ftm:integer tpa:integer tpm:integer
+
+rails g model PlayerPlayoffs player_code:string year:integer first_name:string last_name:string player_team:string player_league:string gp:integer minutes:integer pts:integer dreb:integer oreb:integer reb:integer asts:integer stl:integer blk:integer turnover:integer pf:integer fga:integer fgm:integer fta:integer ftm:integer tpa:integer tpm:integer
+
+rails g model PlayerCareer player_code:string first_name:string last_name:string player_league:string gp:integer minutes:integer pts:integer oreb:integer dreb:integer reb:integer asts:integer stl:integer blk:integer turnover:integer pf:integer fga:integer fgm:integer fta:integer ftm:integer tpa:integer tpm:integer
+
+rails g model PlayerAllstar player_code:string year:integer first_name:string last_name:string conference:string player_league:string gp:integer minutes:integer pts:integer dreb:integer oreb:integer reb:integer asts:integer stl:integer blk:integer turnover:integer pf:integer fga:integer fgm:integer fta:integer ftm:integer tpa:integer tpm:integer
+:
+rails g model Draft draft_year:integer draft_round:integer selection:integer team:string first_name:string last_name:string player_code:string drafted_from:string league:string
+
+rails g model Coach coach_code:string year:integer yr_order:integer first_name:string last_name:string season_win:integer season_loss:integer, playoff_win:integer playoff_loss:integer, team:string
+
+rails g model CoachCareer coach_code:string first_name:string last_name:string season_win:integer season_loss:integer, playoff_win:integer playoff_loss:integer

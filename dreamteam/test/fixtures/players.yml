@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  player_code: MyString
+  first_name: MyString
+  last_name: MyString
+  position: MyString
+  first_season: 
+  last_season: 
+  height_ft: 
+  height_in: 
+  weight: 
+  school: MyString
+  b_day: MyString
+
+two:
+  player_code: MyString
+  first_name: MyString
+  last_name: MyString
+  position: MyString
+  first_season: 
+  last_season: 
+  height_ft: 
+  height_in: 
+  weight: 
+  school: MyString
+  b_day: MyString

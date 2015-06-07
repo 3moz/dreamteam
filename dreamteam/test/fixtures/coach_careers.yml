@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  coach_code: MyString
+  first_name: MyString
+  last_name: MyString
+  season_win: 1
+  season_loss: 
+  playoff_win: 1
+  playoff_loss: 1
+
+two:
+  coach_code: MyString
+  first_name: MyString
+  last_name: MyString
+  season_win: 1
+  season_loss: 
+  playoff_win: 1
+  playoff_loss: 1

@@ -1,0 +1,43 @@
+<h1>DREAMTEAM</h1>
+
+<div id='user-box'>
+
+<h3>Already Have An Account? Sign In Here</h3>
+
+  <% if @sign_in_errors %>
+    <span class="error" style:"color:red"><%=@sign_in_errors%></span>
+  <%end%>
+
+  <form action='/session' method='POST'>
+    <label for = 'user_name'>Username:</label>
+    <input name = 'user_name' type='text'>
+
+    <label for = 'password'>Password:</label>
+    <input name = 'password' type = 'password'>
+
+    <input name = "authenticity_token" value = "<%= form_authenticity_token() %>" type = "hidden">
+
+    <button id="signIn">Sign In</button>
+  </form>
+
+<h3> New? Create An Account!</h3>
+
+  <% if @sign_in_errors %>
+    <span class="error" style="color:red"><%=@sign_in_errors%></span>
+  <%end%>
+
+  <form action='/users' method='POST'>
+
+    <label for = "user_name">Username:</label>
+    <input name = "user_name" type = "text">
+
+    <label for = "password">Password:</label>
+    <input name = "password" type = "password">
+
+    <input name = "authenticity_token" value="<%= form_authenticity_token() %>" type="hidden">
+
+    <button id = "signUp">Create</button>
+
+  </form>
+
+</div>
