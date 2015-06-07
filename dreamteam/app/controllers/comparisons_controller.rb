@@ -19,24 +19,29 @@ class ComparisonsController < ApplicationController
     end
   end
 
-  def new
-  end
-
   def create
-    @comparison = Comparison.new(comparison_params)
+    #here the text of the query that will obtain the stats data will be saved in the DB
+    @comparison = Comparison.new(search: params[:comparison])
 
-    @comparison.save
-    redirect_to @comparison
+    if @comparison.save
+    redirect_to '/comparisons'
+    end
   end
 
   def update
   end
 
   def destroy
+    @comparison = Comparison.find_by(id: params[:id])
+    if @comparison.destroy
+      render json: {}
+    else
+      render status: 400, nothing: true
+    end
   end
 
   private
   def comparison_params
-    params.require(:comparison).permit(:search)
+    params.require(:comparison)
   end
 end
