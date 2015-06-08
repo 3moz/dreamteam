@@ -21,15 +21,26 @@ document.addEventListener('DOMContentLoaded', function(){
       var comps = JSON.parse(xhr.responseText);
       comps.forEach(function(comp){
         addComp(comp.id, comp.search);
+        //obtainData(comp.search);
       });
     });
     xhr.send();
   }
 
+  // var obtainData = function(compSearch){//run DB query using input string from comp 
+  //   var xhr = new XMLHttpRequest();
+  //   xhr.open('get', location.origin+'/comparisons.json');
+  //   xhr.addEventListener('load', function(){
+  //     var comps = JSON.parse(xhr.responseText);
+  //     comps.for
+  //   })
+  // }
+
   var deleteComp = function(){
     
     var targetNode = document.getElementById(this.parentNode.id);
-    console.log(targetNode.id.substring(4));
+    
+    console.log(targetNode.id.substring(4));//noting the ID of deleted comp
 
     var xhr = new XMLHttpRequest();
     xhr.open('DELETE', location.origin+'/comparisons/'+targetNode.id.substring(4));

@@ -4,6 +4,17 @@ Rails.application.routes.draw do
   root 'sessions#new'
 
   resources :comparisons
+  resources :coach_careers, only: [:show, :index]
+  resources :coaches, only: [:show, :index]
+  resources :drafts, only: [:show, :index]
+  resources :player_allstars, only: [:show, :index]
+  resources :player_careers, only: [:show, :index]
+  resources :player_playoffs, only: [:show, :index]
+  resources :player_playoffs_careers, only: [:show, :index]
+  resources :player_regular_seasons, only: [:show, :index]
+  resources :players, only: [:show, :index]
+  resources :team_seasons, only: [:show, :index]
+  resources :teams, only: [:show, :index]
   resources :users, only: [:create, :index]
   resource :session, only: [:new, :create, :destroy, :show]
   resource :secret, only: [:show]

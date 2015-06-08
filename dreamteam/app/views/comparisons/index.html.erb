@@ -7,12 +7,6 @@
   <button id='addComp'>Compare</button>
 </form>
 
-
-<h1>All Saved Comparisons</h1>
-
-<div id='compList'>
-</div>
-
 <form method='POST' action='/session'>
 
   <input name='authenticity_token' value='<%= form_authenticity_token() %>' type='hidden'>
@@ -20,5 +14,16 @@
   <button id='logout'>Log Out</button>
 
 </form>
+
+
+<h1>All Saved Comparisons</h1>
+
+<div id='compList'>
+</div>
+
+<h1>Comparison Visuals</h1>
+
+<div id='visuals'>
+</div>
 
 

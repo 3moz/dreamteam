@@ -28,6 +28,14 @@ class ComparisonsController < ApplicationController
     end
   end
 
+  # def visual
+  
+  #   @visual = Coach.find_by(id: params[:id])
+  #   if @comparison
+  #     data = 
+  # end
+
+
   def update
   end
 
