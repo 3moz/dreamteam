@@ -61,6 +61,9 @@ document.addEventListener('DOMContentLoaded', function(){
   }
 
   var setLiToComp = function(li, comp){
+    //here must be built the dropdowns to create the query string
+    //this string will be saved as 'comp', including the route to
+    //the correct controller
     li.innerHTML = comp;
     var compCheck = document.createElement('input');
     compCheck.type = 'checkbox';
@@ -74,6 +77,9 @@ document.addEventListener('DOMContentLoaded', function(){
         //also, assign a DOM id (corresponding to the comparison's
         //unique ID from the DB) to the visualization 
         //for when it needs to be removed from the DOM.
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', location.origin+'/'+comp);
+
 
       }else{ //if compCheck.unchecked
 
