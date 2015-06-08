@@ -10,6 +10,7 @@ class TeamSeasonsController < ApplicationController
   end
 
   def show
+    @params = JSON.parse(params)
     @teamseasons = TeamSeason.find_by_sql(params[:id])
     if @teamseasons
       render json: @teamseasons
