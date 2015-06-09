@@ -1,11 +1,14 @@
 <h1>Create a New Comparison</h1>
 
+<!-- <select id='tableSelect'></select>
+<select id='team_seasonSelect'></select>
+<select id='yearSelect'></select>
+<button id='dropDownSubmit'>submit</button>
+ -->
+<!-- <br><br> -->
 <form method='POST' action='/comparisons'>
   <label for='name'>Compare:</label>
   <input name='comparison'>
-  <select id='tableSelect'></select>
-  <select id='teamSeasonSelect'></select>
-  <select id='yearSelect'></select>
   <input name="authenticity_token" value="<%= form_authenticity_token() %>" type="hidden">
   <button id='addComp'>Compare</button>
 </form>

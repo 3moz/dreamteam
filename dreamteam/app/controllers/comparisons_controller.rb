@@ -21,10 +21,18 @@ class ComparisonsController < ApplicationController
 
   def create
     #here the text of the query that will obtain the stats data will be saved in the DB
-    @comparison = Comparison.new(search: params[:comparison])
+    # @table = params['_json'][0];
+    # @column = params['_json'][1];
+    # @condition = params['_json'][2];
 
+    # @search = 'select from '+@table+' where '+@column+' = '+@condition+''
+
+
+    @comparison = Comparison.create(search: params[:comparison])
+    
+    
     if @comparison.save
-    redirect_to '/comparisons'
+     redirect_to '/comparisons'
     end
   end
 
