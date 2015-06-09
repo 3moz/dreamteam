@@ -8,6 +8,8 @@
 
 -ability to search all tables, not just teams
 
--data visualizations
+-data visualizations for returned results using D3
+
+-hit google news for topical items regarding what the user has queried for
 
 -styling
