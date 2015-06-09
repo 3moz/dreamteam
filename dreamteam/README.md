@@ -8,6 +8,8 @@
 
 -ability to search all tables, not just teams
 
+-hit google news for topical items regarding what the user has queried for
+
 -data visualizations
 
 -styling
