@@ -186,7 +186,9 @@ document.addEventListener('DOMContentLoaded', function(){
         var data = JSON.parse(xhr.responseText);
 
         console.log(data)
-
+        //11 other forEach parsings need to be written to handle
+        //data coming back from the various table.
+        //likely needing if statements.
         var dataArr = [];
         data.forEach(function(team){
           dataArr.push(team.team_location+' '+team.team_name)

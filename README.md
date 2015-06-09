@@ -6,7 +6,7 @@
 
 -ability for user to create a comparison using drop downs instead of typing a sql query
 
--ability to search all tables, not just two
+-ability to search all tables, not just teams
 
 -data visualizations
 
