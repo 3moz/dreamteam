@@ -10,7 +10,7 @@
 
 **data graciously provided at no charge for research purposes at http://basketballreference.com/stats_download.htm**
 
-##This app is a work in progress. Here are functions and technology yet to be implemented:
+##Coming features:
 
 -ability for user to create a comparison using drop downs instead of typing a sql query
 
