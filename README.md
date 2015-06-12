@@ -2,7 +2,15 @@
 
 -tool for historical research on sports statistics
 
-##This app is far from complete. Here are things to be implented still:
+##Implemented:
+
+-User authentication
+
+-Custom rake tasks to import csv data into Rails DB
+
+**data graciously provided at no charge for research purposes at http://basketballreference.com/stats_download.htm**
+
+##This app is a work in progress. Here are functions and technology yet to be implemented:
 
 -ability for user to create a comparison using drop downs instead of typing a sql query
 
