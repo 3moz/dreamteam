@@ -23,3 +23,5 @@
 -hit google news for topical items regarding what the user has queried for
 
 -styling
+
+-other sports!
