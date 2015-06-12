@@ -24,4 +24,4 @@
 
 -styling
 
--other sports!
+-analyze sports other than basketball
