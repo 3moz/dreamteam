@@ -1,4 +1,4 @@
-#coding: UTF-8
+o#coding: UTF-8
 
 require 'CSV'
 require 'open-uri'

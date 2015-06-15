@@ -14,6 +14,72 @@ document.addEventListener('DOMContentLoaded', function(){
 
   getId();
 
+  var selectArea = document.getElementById('selectArea');
+
+  var selector = document.createElement('select');
+
+  selectArea.appendChild(selector);
+
+  var tables = [
+  'teams',
+  'team_seasons',
+  'players',
+  'player_regular_seasons',
+  'player_playoffs_careers',
+  'player_playoffs',
+  'player_careers',
+  'player_allstars',
+  'drafts',
+  'coaches',
+  'coach_careers'
+  ];
+
+  tables.forEach(function(table){
+    var option = document.createElement('option');
+    option.setAttribute('value', table);
+    option.setAttribute('label', table);
+    selector.appendChild(option);
+  });
+
+  selector.addEventListener('change',function(){
+    
+    console.log(selector.value);
+
+    var teams = [
+    'team_code',
+    'team_location',
+    'team_name',
+    'team_league',
+    ]
+//the following will create a new selector if val of 
+//the table selector is 'teams', and the choices in that
+//new selector will be the columns of the teams table,
+//and that new selector will be appended to div selectArea.
+//however, calling selectArea.removeChild(teamSelector)
+//returns an error that seems to say that teamSelector is
+//not a node. Why?
+    if (selector.value === 'teams'){
+      var teamSelector = document.createElement('select');
+      teamSelector.setAttribute('id','teamSelector')
+      selectArea.appendChild(teamSelector);
+
+      teams.forEach(function(column){
+        var option = document.createElement('option');
+        option.setAttribute('value', column);
+        option.setAttribute('label', column);
+        teamSelector.appendChild(option);
+      });
+    } else if (selector.value !== 'teams'){
+      selectArea.removeChild(teamSelector);
+    }
+    //need function to remove teamSelector 
+    //(or any other dropdown created)
+    //if value of selector changes
+  
+
+
+  });
+
   // var tableSelect = document.getElementById('tableSelect');
 
   // var allTables =

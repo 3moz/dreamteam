@@ -7,6 +7,12 @@
  -->
 <!-- <br><br> -->
 <form method='POST' action='/comparisons'>
+
+  <div id='selectArea'>
+<!--     option, value, label -->
+  </div>
+  <br>
+
   <label for='name'>Compare:</label>
   <input name='comparison'>
   <input name="authenticity_token" value="<%= form_authenticity_token() %>" type="hidden">
