@@ -1,4 +1,5 @@
-﻿AbdulKa01 ,1978,Kareem,Abdul-Jabbar,west,N,1,28,11,NULL,NULL,8,3,NULL,NULL,NULL,NULL,12,5,2,1,NULL,NULL
+﻿ilkid,year,firstname,lastname,conference,leag,gp,minutes,pts,dreb,oreb,reb,asts,stl,blk,turnover,pf,fga,fgm,fta,ftm,tpa,tpm
+AbdulKa01 ,1978,Kareem,Abdul-Jabbar,west,N,1,28,11,NULL,NULL,8,3,NULL,NULL,NULL,NULL,12,5,2,1,NULL,NULL
 AbdulKa01 ,1969,Kareem,Abdul-Jabbar,east,N,1,18,10,NULL,NULL,11,4,NULL,NULL,NULL,NULL,8,4,2,2,NULL,NULL
 AbdulKa01 ,1988,Kareem,Abdul-Jabbar,west,N,1,13,4,NULL,NULL,3,0,NULL,NULL,NULL,NULL,6,1,2,2,NULL,NULL
 AbdulKa01 ,1987,Kareem,Abdul-Jabbar,west,N,1,14,10,NULL,NULL,4,0,NULL,NULL,NULL,NULL,9,4,2,2,NULL,NULL

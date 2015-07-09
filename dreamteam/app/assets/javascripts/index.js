@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function(){  
+  document.addEventListener('DOMContentLoaded', function(){  
   var id;
   
   var getId = function(){ //obtain current user ID from session
@@ -16,11 +16,12 @@ document.addEventListener('DOMContentLoaded', function(){
 
   var selectArea = document.getElementById('selectArea');
 
-  var selector = document.createElement('select');
+  var tableSelector = document.createElement('select');
 
-  selectArea.appendChild(selector);
+  selectArea.appendChild(tableSelector);
 
   var tables = [
+  'select data',
   'teams',
   'team_seasons',
   'players',
@@ -38,19 +39,205 @@ document.addEventListener('DOMContentLoaded', function(){
     var option = document.createElement('option');
     option.setAttribute('value', table);
     option.setAttribute('label', table);
-    selector.appendChild(option);
+    tableSelector.appendChild(option);
   });
 
-  selector.addEventListener('change',function(){
-    
-    console.log(selector.value);
+  tableSelector.addEventListener('change',function(){
 
-    var teams = [
-    'team_code',
-    'team_location',
-    'team_name',
-    'team_league',
-    ]
+    //selectArea.removeChild(statSelector);
+    
+    console.log(tableSelector.value);
+    
+    var statSelector = document.createElement('select');
+    statSelector.setAttribute('id','statSelector');
+    selectArea.appendChild(statSelector);
+
+    var statSelectorCreate = function(tableArr){
+      
+      selectArea.appendChild(statSelector);
+
+      tableArr.forEach(function(column){
+        var option = document.createElement('option');
+        option.setAttribute('value', column);
+        option.setAttribute('label', column);
+        statSelector.appendChild(option);
+      });
+    }
+
+
+    if (tableSelector.value==='teams'){
+      
+      document.getElementById('statSelector').remove();
+      
+      var table = [
+      'team_code',
+      'team_location',
+      'team_name',
+      'team_league'
+      ]
+
+      statSelectorCreate(table);
+
+    } else if (tableSelector.value==='players'){
+      
+      document.getElementById('statSelector').remove();
+
+      var table = [
+      'player_code',
+      'first_name',
+      'last_name',
+      'position',
+      'firstseason',
+      'lastseason',
+      'h_feet',
+      'h_inches',
+      'weight',
+      'college',
+      'birthdate'
+      ]
+
+      statSelectorCreate(table);  
+
+    } else if (tableSelector.value==='team_seasons'){
+
+      document.getElementById('statSelector').remove();
+
+      var table = [
+      'team_code',
+      'year',
+      'league',
+      'o_fgm',
+      'o_fga',
+      'o_ftm',
+      'o_fta',
+      'o_oreb',
+      'o_dreb',
+      'o_asts',
+      'o_pf',
+      'o_stl',
+      'o_to',
+      'o_blk',
+      'o_3pm',
+      'o_3pa',
+      '0_pts',
+      'd_fgm',
+      'd_fga',
+      'd_ftm',
+      'd_fta',
+      'd_oreb',
+      'd_dreb',
+      'd_asts',
+      'd_pf',
+      'd_stl',
+      'd_to',
+      'd_blk',
+      'd_3pm',
+      'd_3pa',
+      'd_pts',
+      'pace',
+      'won',
+      'lost'
+      ] 
+
+      statSelectorCreate(table); 
+
+    } else if (tableSelector.value==='player_regular_seasons'){
+
+      document.getElementById('statSelector').remove();
+
+      table = [
+      'player_code',
+      'year',
+      'firstname',
+      'lastname',
+      'team',
+      'leag',
+      'gp',
+      'minutes',
+      'pts',
+      'oreb',
+      'dreb',
+      'reb',
+      'asts',
+      'stl',
+      'blk',
+      'turnover',
+      'pf',
+      'fga',
+      'fgm',
+      'fta',
+      'ftm',
+      'tpa',
+      'tpm'
+      ]
+
+      statSelectorCreate(table);
+    } else if (tableSelector.value==='player_playoffs_careers'){
+
+      document.getElementById('statsSelector').remove();
+
+      table = [
+      'player_code',
+      'firstname',
+      'lastname',
+      'leag',
+      'pg',
+      'minutes',
+      'pts',
+      'dreb',
+      'oreb',
+      'reb',
+      'asts',
+      'stl',
+      'blk',
+      'turnover',
+      'pf',
+      'fga',
+      'fgm',
+      'fta',
+      'ftm',
+      'tpa',
+      'tpm'
+      ]
+
+      statSelectorCreate(table);
+    } else if (tableSelector.value==='player_playoffs'){
+
+      document.getElementById('statSelector').remove();
+
+      table = [
+      'player_code',
+      'year',
+      'firstname',
+      'lastname',
+      'team',
+      'leag',
+      'gp',
+      'minutes',
+      'pts',
+      'dreb',
+      'oreb',
+      'reb',
+      'asts',
+      'stl',
+      'blk',
+      'turnover',
+      'pf',
+      'fga',
+      'fgm',
+      'fta',
+      'ftm',
+      'tpa',
+      'tpm'
+      ]
+
+      statSelectorCreate(table);
+    } 
+
+    else if (tableSelector.value==='select data'){
+      document.getElementById('statSelector').remove();
+      selectArea.removeChild(statSelector);
+    }
 //the following will create a new selector if val of 
 //the table selector is 'teams', and the choices in that
 //new selector will be the columns of the teams table,
@@ -58,20 +245,32 @@ document.addEventListener('DOMContentLoaded', function(){
 //however, calling selectArea.removeChild(teamSelector)
 //returns an error that seems to say that teamSelector is
 //not a node. Why?
-    if (selector.value === 'teams'){
-      var teamSelector = document.createElement('select');
-      teamSelector.setAttribute('id','teamSelector')
-      selectArea.appendChild(teamSelector);
+  
 
-      teams.forEach(function(column){
-        var option = document.createElement('option');
-        option.setAttribute('value', column);
-        option.setAttribute('label', column);
-        teamSelector.appendChild(option);
-      });
-    } else if (selector.value !== 'teams'){
-      selectArea.removeChild(teamSelector);
-    }
+    // if (tableSelector.value === 'teams'){
+    //   var statSelector = document.createElement('select');
+    //   selectArea.appendChild(statSelector);
+
+    //   teams.forEach(function(column){
+    //     var option = document.createElement('option');
+    //     option.setAttribute('value', column);
+    //     option.setAttribute('label', column);
+    //     statSelector.appendChild(option);
+    //   });
+    // } else if (tableSelector.value === 'players'){
+    //   var statSelector = document.createElement('select');
+    //   playerSelector.setAttribute('id','playerSelector')
+    //   selectArea.appendChild(playerSelector);
+
+    //   players.forEach(function(column){
+    //     var option = document.createElement('option');
+    //     option.setAttribute('value', column);
+    //     option.setAttribute('label', column);
+    //     playerSelector.appendChild(option);
+    //   });
+    // } else if (tableSelector.value === 'select data'){
+
+    // }
     //need function to remove teamSelector 
     //(or any other dropdown created)
     //if value of selector changes

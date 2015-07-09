@@ -1,8 +1,9 @@
-﻿ABDELAL01,Alaa,Abdelnaby,F,1990,1994,6,10,240,Duke University,1968-06-24 00:00:00
+﻿ilkid,firstname,lastname,position,firstseason,lastseason,h_feet,h_inches,weight,college,birthdate
+ABDELAL01,Alaa,Abdelnaby,F,1990,1994,6,10,240,Duke University,1968-06-24 00:00:00
 ABDULKA01,Kareem,Abdul-jabbar,C,1969,1988,7,2,225,University of California - Los Angeles,1947-04-16 00:00:00
 ABDULMA01,Mahmo,Abdul-rauf,G,1990,2000,6,1,162,Louisiana State University,1969-03-09 00:00:00
 ABDULTA01,Tariq,Abdul-wahad,G,1997,2002,6,6,223,University of Michigan,1974-11-03 00:00:00
-ABDURSH01,Shareef,Abdur-rahim,F,1996,2007,6,9,225,University of California, Berkeley,1976-12-11 00:00:00
+ABDURSH01,Shareef,Abdur-rahim,F,1996,2007,6,9,225,UC Berkeley,1976-12-11 00:00:00
 ABERNTO01,Tom,Abernethy,F,1976,1980,6,7,220,Indiana University,1954-05-06 00:00:00
 ABLEFO01,Forest,Able,G,1956,1956,6,3,180,Western Kentucky University,1932-07-27 00:00:00
 ABRAMJO01,John,Abramovic,F,1946,1947,6,3,195,Salem College,1919-02-09 00:00:00
