@@ -52,6 +52,10 @@
     statSelector.setAttribute('id','statSelector');
     selectArea.appendChild(statSelector);
 
+    var compareSelector = document.createElement('select');
+    compareSelector.setAttribute('id','compareSelector');
+    selectArea.appendChild(compareSelector);
+    
     var statSelectorCreate = function(tableArr){
       
       selectArea.appendChild(statSelector);
@@ -64,10 +68,25 @@
       });
     }
 
+    var compareSelectorCreate = function(){
+
+      compareArr = ['<','>','='];
+
+      selectArea.appendChild(compareSelector);
+      
+      compareArr.forEach(function(operation){
+        var option = document.createElement('option');
+        option.setAttribute('value', operation);
+        option.setAttribute('label',operation);
+        compareSelector.appendChild(option);
+      });
+
+    }
 
     if (tableSelector.value==='teams'){
       
       document.getElementById('statSelector').remove();
+      document.getElementById('compareSelector').remove();
       
       var table = [
       'team_code',
@@ -77,6 +96,7 @@
       ]
 
       statSelectorCreate(table);
+      compareSelectorCreate();
 
     } else if (tableSelector.value==='players'){
       
@@ -343,6 +363,8 @@
     }else if (tableSelector.value==='select data'){
       document.getElementById('statSelector').remove();
       selectArea.removeChild(statSelector);
+      document.getElementById('compareSelector').remove();
+      selectArea.removeChild(compareSelector);
     }
 //the following will create a new selector if val of 
 //the table selector is 'teams', and the choices in that
