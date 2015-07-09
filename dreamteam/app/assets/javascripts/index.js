@@ -101,6 +101,7 @@
     } else if (tableSelector.value==='players'){
       
       document.getElementById('statSelector').remove();
+      document.getElementById('compareSelector').remove();
 
       var table = [
       'player_code',
@@ -116,11 +117,13 @@
       'birthdate'
       ]
 
-      statSelectorCreate(table);  
+      statSelectorCreate(table);
+      compareSelectorCreate();  
 
     } else if (tableSelector.value==='team_seasons'){
 
       document.getElementById('statSelector').remove();
+      document.getElementById('compareSelector').remove();
 
       var table = [
       'team_code',
@@ -159,11 +162,13 @@
       'lost'
       ] 
 
-      statSelectorCreate(table); 
+      statSelectorCreate(table);
+      compareSelectorCreate(); 
 
     } else if (tableSelector.value==='player_regular_seasons'){
 
       document.getElementById('statSelector').remove();
+      document.getElementById('compareSelector').remove();
 
       table = [
       'player_code',
@@ -192,9 +197,12 @@
       ]
 
       statSelectorCreate(table);
+      compareSelectorCreate(); 
+
     } else if (tableSelector.value==='player_playoffs_career'){
 
       document.getElementById('statSelector').remove();
+      document.getElementById('compareSelector').remove();
 
       table = [
       'player_code',
@@ -221,9 +229,12 @@
       ]
 
       statSelectorCreate(table);
+      compareSelectorCreate();
+
     } else if (tableSelector.value==='player_playoffs'){
 
       document.getElementById('statSelector').remove();
+      document.getElementById('compareSelector').remove();
 
       table = [
       'player_code',
@@ -252,9 +263,12 @@
       ]
 
       statSelectorCreate(table);
+      compareSelectorCreate();
+
     } else if (tableSelector.value==='player_careers'){
 
       document.getElementById('statSelector').remove();
+      document.getElementById('compareSelector').remove();
 
       table = [
       'player_code',
@@ -280,9 +294,12 @@
       'tpm'
       ]
       statSelectorCreate(table);
+      compareSelectorCreate();
+
     } else if (tableSelector.value==='player_allstars'){
 
       document.getElementById('statSelector').remove();
+      document.getElementById('compareSelector').remove();
 
       table = [
       'player_code',
@@ -311,9 +328,12 @@
       ]
 
       statSelectorCreate(table);
+      compareSelectorCreate();
+
     } else if (tableSelector.value==='drafts'){
       
       document.getElementById('statSelector').remove();
+      document.getElementById('compareSelector').remove();
 
       table = [
       'draft_year',
@@ -327,9 +347,12 @@
       ]
 
       statSelectorCreate(table);
+      compareSelectorCreate();
+
     } else if (tableSelector.value==='coaches'){
       
       document.getElementById('statSelector').remove();
+      document.getElementById('compareSelector').remove();
 
       table = [
       'coachid',
@@ -345,9 +368,12 @@
       ]
 
       statSelectorCreate(table);
+      compareSelectorCreate();
+
     } else if (tableSelector.value==='coach_careers'){
 
       document.getElementById('statSelector').remove();
+      document.getElementById('compareSelector').remove();
 
       table = [
       'coachid',
@@ -360,6 +386,8 @@
       ]
 
       statSelectorCreate(table);
+      compareSelectorCreate();
+      
     }else if (tableSelector.value==='select data'){
       document.getElementById('statSelector').remove();
       selectArea.removeChild(statSelector);
