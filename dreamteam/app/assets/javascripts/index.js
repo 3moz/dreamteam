@@ -26,7 +26,7 @@
   'team_seasons',
   'players',
   'player_regular_seasons',
-  'player_playoffs_careers',
+  'player_playoffs_career',
   'player_playoffs',
   'player_careers',
   'player_allstars',
@@ -172,9 +172,9 @@
       ]
 
       statSelectorCreate(table);
-    } else if (tableSelector.value==='player_playoffs_careers'){
+    } else if (tableSelector.value==='player_playoffs_career'){
 
-      document.getElementById('statsSelector').remove();
+      document.getElementById('statSelector').remove();
 
       table = [
       'player_code',
@@ -232,9 +232,115 @@
       ]
 
       statSelectorCreate(table);
-    } 
+    } else if (tableSelector.value==='player_careers'){
 
-    else if (tableSelector.value==='select data'){
+      document.getElementById('statSelector').remove();
+
+      table = [
+      'player_code',
+      'firstname',
+      'lastname',
+      'leag',
+      'gp',
+      'minutes',
+      'pts',
+      'oreb',
+      'dreb',
+      'reb',
+      'asts',
+      'stl',
+      'blk',
+      'turnover',
+      'pf',
+      'fga',
+      'fgm',
+      'fta',
+      'ftm',
+      'tpa',
+      'tpm'
+      ]
+      statSelectorCreate(table);
+    } else if (tableSelector.value==='player_allstars'){
+
+      document.getElementById('statSelector').remove();
+
+      table = [
+      'player_code',
+      'year',
+      'firstname',
+      'lastname',
+      'conference',
+      'leag',
+      'gp',
+      'minutes',
+      'pts',
+      'dreb',
+      'oreb',
+      'reb',
+      'asts',
+      'stl',
+      'blk',
+      'turnover',
+      'pf',
+      'fga',
+      'fgm',
+      'fta',
+      'ftm',
+      'tpa',
+      'tpm'
+      ]
+
+      statSelectorCreate(table);
+    } else if (tableSelector.value==='drafts'){
+      
+      document.getElementById('statSelector').remove();
+
+      table = [
+      'draft_year',
+      'draft_round',
+      'selection',
+      'team',
+      'firstname','lastname',
+      'player_code',
+      'draft_from',
+      'leag'
+      ]
+
+      statSelectorCreate(table);
+    } else if (tableSelector.value==='coaches'){
+      
+      document.getElementById('statSelector').remove();
+
+      table = [
+      'coachid',
+      'year',
+      'yr_order',
+      'firstname',
+      'lastname',
+      'season_win',
+      'season_loss',
+      'playoff_win',
+      'playoff_loss',
+      'team'
+      ]
+
+      statSelectorCreate(table);
+    } else if (tableSelector.value==='coach_careers'){
+
+      document.getElementById('statSelector').remove();
+
+      table = [
+      'coachid',
+      'firstname',
+      'lastname',
+      'season_win',
+      'season_loss',
+      'playoff_win',
+      'playoff_loss'
+      ]
+
+      statSelectorCreate(table);
+    }else if (tableSelector.value==='select data'){
       document.getElementById('statSelector').remove();
       selectArea.removeChild(statSelector);
     }
