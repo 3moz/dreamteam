@@ -60,6 +60,7 @@
     valChoiceSelector.setAttribute('id','valChoiceSelector');
     selectArea.appendChild(valChoiceSelector);
     
+
     var statSelectorCreate = function(tableArr){
       
       selectArea.appendChild(statSelector);
@@ -88,46 +89,68 @@
     }
 
     var valChoiceSelectorCreate = function(){
+
       //this will take the value of tableSelector (table) and statSelector.value, and
       //make an ajax request to 'select * from [table]' and then
       //with the resulting data, obtain a list of possible values under the column of
       //[metric] - these will be the possibilities to choose from in the last drop-down.
-      table = tableSelector.value;
-      metric = statSelector.value;
-      valueChoicesArr = [];
+      selectArea.appendChild(valChoiceSelector);
 
-      var xhr = new XMLHttpRequest
-      xhr.open('GET', location.origin+'/'+table+'.json');
-      xhr.addEventListener('load', function(){
+      statSelector.addEventListener('change', function(){
+
+        table = tableSelector.value;
         
-        response = JSON.parse(xhr.responseText);
+        valueChoicesArr = [];
+        valChoiceSelector.innerHTML = '';
         
-        console.log(response); //JSON object of all returned records
-        console.log(response[0].team_code);
-        console.log(response.length);
-        //this (above works where the table is teams and the metric is team_code
-        //returns team_code value for one team (which is, itself, a JSON object)
 
-        for (var i = 0; i < response.length; i++){
-          valueChoicesArr.push(response[i].metric);
-        }
+        var xhr = new XMLHttpRequest
+        xhr.open('GET', location.origin+'/'+table+'.json');
+        xhr.addEventListener('load', function(){
+          
+          response = JSON.parse(xhr.responseText);//JSON object of all returned records
 
-        console.log(valueChoicesArr);
-        //these are all undefined right now because at the time this is called, 
-        //metric (statSelector.value) has no value yet. this xhr request needs to be fired 
-        //on a change in the state of the *select metric* drop down.
-        //valChoiceSelectorCreate needs to live outside the tableSelector event listener,
-        //but be called from within it.
+          metric = statSelector.value;
+
+          for (var i = 0; i < response.length; i++){
+            valueChoicesArr.push(response[i][metric]);
+          }
+          //the above returns an array of values contained in the [metric] keys of [table]
+          //these will populate the value selector drop-down, below
+
+          selectArea.appendChild(valChoiceSelector);
+          
+          valueChoicesArr.forEach(function(valChoice){
+            var option = document.createElement('option');
+            option.setAttribute('value', valChoice);
+            option.setAttribute('label', valChoice);
+            valChoiceSelector.appendChild(option);
+          });
+
+        });
+
+        xhr.send();
 
       });
-      xhr.send();
+    }
+
+    var clearDropDowns = function(){
+      document.getElementById('statSelector').remove();
+      selectArea.removeChild(statSelector);
+      document.getElementById('compareSelector').remove();
+      selectArea.removeChild(compareSelector);
+      document.getElementById('valChoiceSelector').remove();
+      selectArea.removeChild(valChoiceSelector);
     }
 
     if (tableSelector.value==='teams'){
       
       document.getElementById('statSelector').remove();
       document.getElementById('compareSelector').remove();
+      document.getElementById('valChoiceSelector').remove();
       
+
+
       var table = [
       'select metric',
       'team_code',
@@ -144,35 +167,40 @@
       
       document.getElementById('statSelector').remove();
       document.getElementById('compareSelector').remove();
-
+      document.getElementById('valChoiceSelector').remove();
+      
+      
       var table = [
       'select metric',
       'player_code',
       'first_name',
       'last_name',
       'position',
-      'firstseason',
-      'lastseason',
-      'h_feet',
-      'h_inches',
+      'first_season',
+      'last_season',
+      'height_ft',
+      'height_in',
       'weight',
-      'college',
-      'birthdate'
+      'school',
+      'b_day'
       ]
 
       statSelectorCreate(table);
-      compareSelectorCreate();  
+      compareSelectorCreate();
+      valChoiceSelectorCreate();  
 
     } else if (tableSelector.value==='team_seasons'){
 
       document.getElementById('statSelector').remove();
       document.getElementById('compareSelector').remove();
+      document.getElementById('valChoiceSelector').remove();
+      
 
       var table = [
       'select metric',
       'team_code',
       'year',
-      'league',
+      'team_league',
       'o_fgm',
       'o_fga',
       'o_ftm',
@@ -186,7 +214,7 @@
       'o_blk',
       'o_3pm',
       'o_3pa',
-      '0_pts',
+      'o_pts',
       'd_fgm',
       'd_fga',
       'd_ftm',
@@ -207,21 +235,24 @@
       ] 
 
       statSelectorCreate(table);
-      compareSelectorCreate(); 
+      compareSelectorCreate();
+      valChoiceSelectorCreate(); 
 
     } else if (tableSelector.value==='player_regular_seasons'){
 
       document.getElementById('statSelector').remove();
       document.getElementById('compareSelector').remove();
+      document.getElementById('valChoiceSelector').remove();
+      
 
       table = [
       'select metric',
       'player_code',
       'year',
-      'firstname',
-      'lastname',
+      'first_name',
+      'last_name',
       'team',
-      'leag',
+      'league',
       'gp',
       'minutes',
       'pts',
@@ -242,12 +273,15 @@
       ]
 
       statSelectorCreate(table);
-      compareSelectorCreate(); 
+      compareSelectorCreate();
+      valChoiceSelectorCreate();  
 
     } else if (tableSelector.value==='player_playoffs_career'){
 
       document.getElementById('statSelector').remove();
       document.getElementById('compareSelector').remove();
+      document.getElementById('valChoiceSelector').remove();
+      
 
       table = [
       'select metric',
@@ -276,11 +310,14 @@
 
       statSelectorCreate(table);
       compareSelectorCreate();
+      valChoiceSelectorCreate(); 
 
     } else if (tableSelector.value==='player_playoffs'){
 
       document.getElementById('statSelector').remove();
       document.getElementById('compareSelector').remove();
+      document.getElementById('valChoiceSelector').remove();
+      
 
       table = [
       'select metric',
@@ -311,11 +348,14 @@
 
       statSelectorCreate(table);
       compareSelectorCreate();
+      valChoiceSelectorCreate();
 
     } else if (tableSelector.value==='player_careers'){
 
       document.getElementById('statSelector').remove();
       document.getElementById('compareSelector').remove();
+      document.getElementById('valChoiceSelector').remove();
+      
 
       table = [
       'select metric',
@@ -343,11 +383,14 @@
       ]
       statSelectorCreate(table);
       compareSelectorCreate();
+      valChoiceSelectorCreate();
 
     } else if (tableSelector.value==='player_allstars'){
 
       document.getElementById('statSelector').remove();
       document.getElementById('compareSelector').remove();
+      document.getElementById('valChoiceSelector').remove();
+      
 
       table = [
       'select metric',
@@ -378,11 +421,14 @@
 
       statSelectorCreate(table);
       compareSelectorCreate();
+      valChoiceSelectorCreate();
 
     } else if (tableSelector.value==='drafts'){
       
       document.getElementById('statSelector').remove();
       document.getElementById('compareSelector').remove();
+      document.getElementById('valChoiceSelector').remove();
+      
 
       table = [
       'select metric',
@@ -398,11 +444,14 @@
 
       statSelectorCreate(table);
       compareSelectorCreate();
+      valChoiceSelectorCreate();
 
     } else if (tableSelector.value==='coaches'){
       
       document.getElementById('statSelector').remove();
       document.getElementById('compareSelector').remove();
+      document.getElementById('valChoiceSelector').remove();
+      
 
       table = [
       'select metric',
@@ -420,11 +469,14 @@
 
       statSelectorCreate(table);
       compareSelectorCreate();
+      valChoiceSelectorCreate();
 
     } else if (tableSelector.value==='coach_careers'){
 
       document.getElementById('statSelector').remove();
       document.getElementById('compareSelector').remove();
+      document.getElementById('valChoiceSelector').remove();
+      
 
       table = [
       'select metric',
@@ -439,19 +491,13 @@
 
       statSelectorCreate(table);
       compareSelectorCreate();
+      valChoiceSelectorCreate();
 
-    }else if (tableSelector.value==='select data'){
-      document.getElementById('statSelector').remove();
-      selectArea.removeChild(statSelector);
-      document.getElementById('compareSelector').remove();
-      selectArea.removeChild(compareSelector);
-    }
-
-    var query = 'select * from '+tableSelector.value+';';
-    console.log(query);
+    } else if (tableSelector.value==='select data'){
+      
+      clearDropDowns();
+    } 
   });
-
-  
 
   // var dropDownSubmit = document.getElementById('dropDownSubmit');
   // dropDownSubmit.addEventListener('click', function(){
