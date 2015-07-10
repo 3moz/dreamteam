@@ -55,6 +55,10 @@
     var compareSelector = document.createElement('select');
     compareSelector.setAttribute('id','compareSelector');
     selectArea.appendChild(compareSelector);
+
+    var valChoiceSelector = document.createElement('select');
+    valChoiceSelector.setAttribute('id','valChoiceSelector');
+    selectArea.appendChild(valChoiceSelector);
     
     var statSelectorCreate = function(tableArr){
       
@@ -70,7 +74,7 @@
 
     var compareSelectorCreate = function(){
 
-      compareArr = ['<','>','='];
+      compareArr = ['choose operation','<','>','='];
 
       selectArea.appendChild(compareSelector);
       
@@ -83,12 +87,49 @@
 
     }
 
+    var valChoiceSelectorCreate = function(){
+      //this will take the value of tableSelector (table) and statSelector.value, and
+      //make an ajax request to 'select * from [table]' and then
+      //with the resulting data, obtain a list of possible values under the column of
+      //[metric] - these will be the possibilities to choose from in the last drop-down.
+      table = tableSelector.value;
+      metric = statSelector.value;
+      valueChoicesArr = [];
+
+      var xhr = new XMLHttpRequest
+      xhr.open('GET', location.origin+'/'+table+'.json');
+      xhr.addEventListener('load', function(){
+        
+        response = JSON.parse(xhr.responseText);
+        
+        console.log(response); //JSON object of all returned records
+        console.log(response[0].team_code);
+        console.log(response.length);
+        //this (above works where the table is teams and the metric is team_code
+        //returns team_code value for one team (which is, itself, a JSON object)
+
+        for (var i = 0; i < response.length; i++){
+          valueChoicesArr.push(response[i].metric);
+        }
+
+        console.log(valueChoicesArr);
+        //these are all undefined right now because at the time this is called, 
+        //metric (statSelector.value) has no value yet. this xhr request needs to be fired 
+        //on a change in the state of the *select metric* drop down.
+        //valChoiceSelectorCreate needs to live outside the tableSelector event listener,
+        //but be called from within it.
+
+      });
+      xhr.send();
+    }
+
     if (tableSelector.value==='teams'){
       
       document.getElementById('statSelector').remove();
       document.getElementById('compareSelector').remove();
       
       var table = [
+      'select metric',
       'team_code',
       'team_location',
       'team_name',
@@ -97,6 +138,7 @@
 
       statSelectorCreate(table);
       compareSelectorCreate();
+      valChoiceSelectorCreate();
 
     } else if (tableSelector.value==='players'){
       
@@ -104,6 +146,7 @@
       document.getElementById('compareSelector').remove();
 
       var table = [
+      'select metric',
       'player_code',
       'first_name',
       'last_name',
@@ -126,6 +169,7 @@
       document.getElementById('compareSelector').remove();
 
       var table = [
+      'select metric',
       'team_code',
       'year',
       'league',
@@ -171,6 +215,7 @@
       document.getElementById('compareSelector').remove();
 
       table = [
+      'select metric',
       'player_code',
       'year',
       'firstname',
@@ -205,6 +250,7 @@
       document.getElementById('compareSelector').remove();
 
       table = [
+      'select metric',
       'player_code',
       'firstname',
       'lastname',
@@ -237,6 +283,7 @@
       document.getElementById('compareSelector').remove();
 
       table = [
+      'select metric',
       'player_code',
       'year',
       'firstname',
@@ -271,6 +318,7 @@
       document.getElementById('compareSelector').remove();
 
       table = [
+      'select metric',
       'player_code',
       'firstname',
       'lastname',
@@ -302,6 +350,7 @@
       document.getElementById('compareSelector').remove();
 
       table = [
+      'select metric',
       'player_code',
       'year',
       'firstname',
@@ -336,6 +385,7 @@
       document.getElementById('compareSelector').remove();
 
       table = [
+      'select metric',
       'draft_year',
       'draft_round',
       'selection',
@@ -355,6 +405,7 @@
       document.getElementById('compareSelector').remove();
 
       table = [
+      'select metric',
       'coachid',
       'year',
       'yr_order',
@@ -376,6 +427,7 @@
       document.getElementById('compareSelector').remove();
 
       table = [
+      'select metric',
       'coachid',
       'firstname',
       'lastname',
@@ -387,137 +439,19 @@
 
       statSelectorCreate(table);
       compareSelectorCreate();
-      
+
     }else if (tableSelector.value==='select data'){
       document.getElementById('statSelector').remove();
       selectArea.removeChild(statSelector);
       document.getElementById('compareSelector').remove();
       selectArea.removeChild(compareSelector);
     }
-//the following will create a new selector if val of 
-//the table selector is 'teams', and the choices in that
-//new selector will be the columns of the teams table,
-//and that new selector will be appended to div selectArea.
-//however, calling selectArea.removeChild(teamSelector)
-//returns an error that seems to say that teamSelector is
-//not a node. Why?
-  
 
-    // if (tableSelector.value === 'teams'){
-    //   var statSelector = document.createElement('select');
-    //   selectArea.appendChild(statSelector);
-
-    //   teams.forEach(function(column){
-    //     var option = document.createElement('option');
-    //     option.setAttribute('value', column);
-    //     option.setAttribute('label', column);
-    //     statSelector.appendChild(option);
-    //   });
-    // } else if (tableSelector.value === 'players'){
-    //   var statSelector = document.createElement('select');
-    //   playerSelector.setAttribute('id','playerSelector')
-    //   selectArea.appendChild(playerSelector);
-
-    //   players.forEach(function(column){
-    //     var option = document.createElement('option');
-    //     option.setAttribute('value', column);
-    //     option.setAttribute('label', column);
-    //     playerSelector.appendChild(option);
-    //   });
-    // } else if (tableSelector.value === 'select data'){
-
-    // }
-    //need function to remove teamSelector 
-    //(or any other dropdown created)
-    //if value of selector changes
-  
-
-
+    var query = 'select * from '+tableSelector.value+';';
+    console.log(query);
   });
 
-  // var tableSelect = document.getElementById('tableSelect');
-
-  // var allTables =
-  // ['teams',
-  // 'team_seasons',
-  // 'players',
-  // 'player_regular_seasons',
-  // 'player_playoffs_careers',
-  // 'player_playoffs',
-  // 'player_careers',
-  // 'player_allstars',
-  // 'drafts',
-  // 'coaches',
-  // 'coach_careers'];
-
-  // allTables.forEach(function(item){
-  //   var option = document.createElement('option');
-  //   option.setAttribute('value',item);
-  //   option.setAttribute('label',item);
-  //   tableSelect.appendChild(option);
-  // });
-
-  // var team_seasonSelect = document.getElementById('team_seasonSelect')
-
-  // var allTeamSeasons = 
-  // ['year',
-  // 'team_league',
-  // 'o_fgm',
-  // 'o_fga',
-  // 'o_ftm',
-  // 'o_fta',
-  // 'o_oreb',
-  // 'o_dreb',
-  // 'o_reb',
-  // 'o_asts',
-  // 'o_pf',
-  // 'o_stl',
-  // 'o_to',
-  // 'o_to',
-  // 'o_blk',
-  // 'o_3pm',
-  // 'o_3pa',
-  // 'o_pts',
-  // 'd_fgm',
-  // 'd_fga',
-  // 'd_ftm',
-  // 'd_fta',
-  // 'd_oreb',
-  // 'd_dreb',
-  // 'd_reb',
-  // 'd_asts',
-  // 'd_pf',
-  // 'd_stl',
-  // 'd_to',
-  // 'd_to',
-  // 'd_blk',
-  // 'd_3pm',
-  // 'd_3pa',
-  // 'd_pts',
-  // 'pace',
-  // 'won',
-  // 'lost'];
-
-  // allTeamSeasons.forEach(function(item){
-  //   var option = document.createElement('option');
-  //   option.setAttribute('value',item);
-  //   option.setAttribute('label',item);
-  //   team_seasonSelect.appendChild(option);
-  // });
-
-  // var yearSelect = document.getElementById('yearSelect')
-
-  // var allYears = []
-  // for (var i = 1946; i<2010; i++){
-  //   allYears.push(i);
-  // }
-
-  // allYears.forEach(function(item){
-  //   var option = document.createElement('option');
-  //   option.setAttribute('value',item);
-  //   option.setAttribute('label',item);
-  //   yearSelect.appendChild(option);
-  // });
+  
 
   // var dropDownSubmit = document.getElementById('dropDownSubmit');
   // dropDownSubmit.addEventListener('click', function(){
