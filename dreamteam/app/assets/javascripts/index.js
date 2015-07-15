@@ -17,6 +17,7 @@
   var selectArea = document.getElementById('selectArea');
 
   var tableSelector = document.createElement('select');
+  tableSelector.setAttribute('id','tableSelector');
 
   selectArea.appendChild(tableSelector);
 
@@ -26,7 +27,7 @@
   'team_seasons',
   'players',
   'player_regular_seasons',
-  'player_playoffs_career',
+  'player_playoffs_careers',
   'player_playoffs',
   'player_careers',
   'player_allstars',
@@ -115,12 +116,36 @@
           for (var i = 0; i < response.length; i++){
             valueChoicesArr.push(response[i][metric]);
           }
-          //the above returns an array of values contained in the [metric] keys of [table]
+
+          uniqifiedValues = valueChoicesArr.filter(function(val, i, valueChoicesArr){
+            return valueChoicesArr.indexOf(val)===i;
+          });//returns an array of unique values from valueChoicesArr
+           
+          //define how two numeric elements will be compared in order for the uniqified array to be sorted 
+          function compare(a,b){
+            return a-b;
+          }
+
+          if (typeof(uniqifiedValues[0])==='string'){
+            sortedUniqVals = uniqifiedValues.sort();
+          } else if (typeof(uniqifiedValues[0])==='number'){
+            sortedUniqVals = uniqifiedValues.sort(compare);
+          } 
+
+          //.sort(compare) sorts numerical vals in an array according to compare (line 126)
+          //.sort() sorts string according to ascii value of chars. 
+
+          console.log(valueChoicesArr); //all vals from db call, unsorted
+          console.log(valueChoicesArr.length+" total returned choices");
+          console.log(sortedUniqVals); //unique, sorted vals from db call --> placed in dropdown
+          console.log(sortedUniqVals.length+" unique choices sorted"); 
+          
+          //the above returns an array of unique, sorted values contained in the [metric] keys of [table]
           //these will populate the value selector drop-down, below
 
           selectArea.appendChild(valChoiceSelector);
           
-          valueChoicesArr.forEach(function(valChoice){
+          sortedUniqVals.forEach(function(valChoice){
             var option = document.createElement('option');
             option.setAttribute('value', valChoice);
             option.setAttribute('label', valChoice);
@@ -276,7 +301,7 @@
       compareSelectorCreate();
       valChoiceSelectorCreate();  
 
-    } else if (tableSelector.value==='player_playoffs_career'){
+    } else if (tableSelector.value==='player_playoffs_careers'){
 
       document.getElementById('statSelector').remove();
       document.getElementById('compareSelector').remove();
@@ -286,14 +311,14 @@
       table = [
       'select metric',
       'player_code',
-      'firstname',
-      'lastname',
-      'leag',
-      'pg',
+      'first_name',
+      'last_name',
+      'player_league',
+      'gp',
       'minutes',
       'pts',
-      'dreb',
-      'oreb',
+      'drb',
+      'orb',
       'reb',
       'asts',
       'stl',
@@ -323,10 +348,10 @@
       'select metric',
       'player_code',
       'year',
-      'firstname',
-      'lastname',
-      'team',
-      'leag',
+      'first_name',
+      'last_name',
+      'player_team',
+      'player_league',
       'gp',
       'minutes',
       'pts',
@@ -360,9 +385,9 @@
       table = [
       'select metric',
       'player_code',
-      'firstname',
-      'lastname',
-      'leag',
+      'first_name',
+      'last_name',
+      'player_league',
       'gp',
       'minutes',
       'pts',
@@ -396,10 +421,10 @@
       'select metric',
       'player_code',
       'year',
-      'firstname',
-      'lastname',
+      'first_name',
+      'last_name',
       'conference',
-      'leag',
+      'player_league',
       'gp',
       'minutes',
       'pts',
@@ -436,10 +461,11 @@
       'draft_round',
       'selection',
       'team',
-      'firstname','lastname',
+      'first_name',
+      'last_name',
       'player_code',
-      'draft_from',
-      'leag'
+      'drafted_from',
+      'league'
       ]
 
       statSelectorCreate(table);
@@ -455,11 +481,11 @@
 
       table = [
       'select metric',
-      'coachid',
+      'coach_code',
       'year',
       'yr_order',
-      'firstname',
-      'lastname',
+      'first_name',
+      'last_name',
       'season_win',
       'season_loss',
       'playoff_win',
@@ -480,9 +506,9 @@
 
       table = [
       'select metric',
-      'coachid',
-      'firstname',
-      'lastname',
+      'coach_code',
+      'first_name',
+      'last_name',
       'season_win',
       'season_loss',
       'playoff_win',
