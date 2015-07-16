@@ -21,6 +21,15 @@
 
   selectArea.appendChild(tableSelector);
 
+  var visArea = document.getElementById('visArea');
+
+  var visButton = document.createElement('button');
+  visButton.innerHTML = "Visualize";
+  visArea.appendChild(visButton);
+  visButton.setAttribute('disabled', true);
+  
+
+
   var tables = [
   'select data',
   'teams',
@@ -43,10 +52,8 @@
     tableSelector.appendChild(option);
   });
 
-  tableSelector.addEventListener('change',function(){
+  tableSelector.addEventListener('change', function(){
 
-    //selectArea.removeChild(statSelector);
-    
     console.log(tableSelector.value);
     
     var statSelector = document.createElement('select');
@@ -60,7 +67,6 @@
     var valChoiceSelector = document.createElement('select');
     valChoiceSelector.setAttribute('id','valChoiceSelector');
     selectArea.appendChild(valChoiceSelector);
-    
 
     var statSelectorCreate = function(tableArr){
       
@@ -96,66 +102,77 @@
       //with the resulting data, obtain a list of possible values under the column of
       //[metric] - these will be the possibilities to choose from in the last drop-down.
       selectArea.appendChild(valChoiceSelector);
+      
+      
+
 
       statSelector.addEventListener('change', function(){
 
-        table = tableSelector.value;
-        
-        valueChoicesArr = [];
-        valChoiceSelector.innerHTML = '';
-        
+        if (statSelector.value ==='select metric'){
+          valChoiceSelector.innerHTML = '';
+          visButtonValuesChecker();
+        } else {
 
-        var xhr = new XMLHttpRequest
-        xhr.open('GET', location.origin+'/'+table+'.json');
-        xhr.addEventListener('load', function(){
+          visButtonValuesChecker();
+
+          table = tableSelector.value;
           
-          response = JSON.parse(xhr.responseText);//JSON object of all returned records
-
-          metric = statSelector.value;
-
-          for (var i = 0; i < response.length; i++){
-            valueChoicesArr.push(response[i][metric]);
-          }
-
-          uniqifiedValues = valueChoicesArr.filter(function(val, i, valueChoicesArr){
-            return valueChoicesArr.indexOf(val)===i;
-          });//returns an array of unique values from valueChoicesArr
-           
-          //define how two numeric elements will be compared in order for the uniqified array to be sorted 
-          function compare(a,b){
-            return a-b;
-          }
-
-          if (typeof(uniqifiedValues[0])==='string'){
-            sortedUniqVals = uniqifiedValues.sort();
-          } else if (typeof(uniqifiedValues[0])==='number'){
-            sortedUniqVals = uniqifiedValues.sort(compare);
-          } 
-
-          //.sort(compare) sorts numerical vals in an array according to compare (line 126)
-          //.sort() sorts string according to ascii value of chars. 
-
-          console.log(valueChoicesArr); //all vals from db call, unsorted
-          console.log(valueChoicesArr.length+" total returned choices");
-          console.log(sortedUniqVals); //unique, sorted vals from db call --> placed in dropdown
-          console.log(sortedUniqVals.length+" unique choices sorted"); 
+          valueChoicesArr = [];
+          valChoiceSelector.innerHTML = '';
           
-          //the above returns an array of unique, sorted values contained in the [metric] keys of [table]
-          //these will populate the value selector drop-down, below
 
-          selectArea.appendChild(valChoiceSelector);
-          
-          sortedUniqVals.forEach(function(valChoice){
-            var option = document.createElement('option');
-            option.setAttribute('value', valChoice);
-            option.setAttribute('label', valChoice);
-            valChoiceSelector.appendChild(option);
+          var xhr = new XMLHttpRequest
+          xhr.open('GET', location.origin+'/'+table+'.json');
+          xhr.addEventListener('load', function(){
+            
+            response = JSON.parse(xhr.responseText);//JSON object of all returned records
+
+            metric = statSelector.value;
+
+            for (var i = 0; i < response.length; i++){
+              valueChoicesArr.push(response[i][metric]);
+            }
+
+            uniqifiedValues = valueChoicesArr.filter(function(val, i, valueChoicesArr){
+              return valueChoicesArr.indexOf(val)===i;
+            });//returns an array of unique values from valueChoicesArr
+             
+            //define how two numeric elements will be compared in order for the uniqified array to be sorted 
+            function compare(a,b){
+              return a-b;
+            }
+
+            if (typeof(uniqifiedValues[0])==='string'){
+              sortedUniqVals = uniqifiedValues.sort();
+            } else if (typeof(uniqifiedValues[0])==='number'){
+              sortedUniqVals = uniqifiedValues.sort(compare);
+            } 
+
+            //.sort(compare) sorts numerical vals in an array according to compare (line 126)
+            //.sort() sorts string according to ascii value of chars. 
+
+            console.log(valueChoicesArr); //all vals from db call, unsorted
+            console.log(valueChoicesArr.length+" total returned choices");
+            console.log(sortedUniqVals); //unique, sorted vals from db call --> placed in dropdown
+            console.log(sortedUniqVals.length+" unique choices sorted"); 
+            
+            //the above returns an array of unique, sorted values contained in the [metric] keys of [table]
+            //these will populate the value selector drop-down, below
+
+            selectArea.appendChild(valChoiceSelector);
+            
+            sortedUniqVals.forEach(function(valChoice){
+              var option = document.createElement('option');
+              option.setAttribute('value', valChoice);
+              option.setAttribute('label', valChoice);
+              valChoiceSelector.appendChild(option);
+            });
+
           });
 
-        });
+          xhr.send();
 
-        xhr.send();
-
+        }
       });
     }
 
@@ -166,14 +183,38 @@
       selectArea.removeChild(compareSelector);
       document.getElementById('valChoiceSelector').remove();
       selectArea.removeChild(valChoiceSelector);
+      document.getElementById('visButton').remove();
+      selectArea.removeChild(visButton);
+            
     }
+
+    var visButtonValuesChecker = function(){
+      
+      console.log('vis button val checker is hit');
+
+      if (
+        (statSelector.value && statSelector.value !== 'select metric') &&  
+        (compareSelector.value && compareSelector.value !== 'choose operation') 
+      ){
+        visButton.removeAttribute('disabled');
+      } else if (
+        statSelector.value === 'select metric' ||
+        compareSelector.value === 'choose operation'
+      ){
+        visButton.setAttribute('disabled',true);
+      }
+    }
+
+    compareSelector.addEventListener('change',function(){
+      visButtonValuesChecker();
+    });
 
     if (tableSelector.value==='teams'){
       
       document.getElementById('statSelector').remove();
       document.getElementById('compareSelector').remove();
       document.getElementById('valChoiceSelector').remove();
-      
+      visButton.setAttribute('disabled', true);      
 
 
       var table = [
@@ -193,6 +234,8 @@
       document.getElementById('statSelector').remove();
       document.getElementById('compareSelector').remove();
       document.getElementById('valChoiceSelector').remove();
+      visButton.setAttribute('disabled', true);
+      
       
       
       var table = [
@@ -219,6 +262,8 @@
       document.getElementById('statSelector').remove();
       document.getElementById('compareSelector').remove();
       document.getElementById('valChoiceSelector').remove();
+      visButton.setAttribute('disabled', true);
+      
       
 
       var table = [
@@ -268,6 +313,8 @@
       document.getElementById('statSelector').remove();
       document.getElementById('compareSelector').remove();
       document.getElementById('valChoiceSelector').remove();
+      visButton.setAttribute('disabled', true);
+      
       
 
       table = [
@@ -306,6 +353,8 @@
       document.getElementById('statSelector').remove();
       document.getElementById('compareSelector').remove();
       document.getElementById('valChoiceSelector').remove();
+      visButton.setAttribute('disabled', true);
+      
       
 
       table = [
@@ -342,6 +391,8 @@
       document.getElementById('statSelector').remove();
       document.getElementById('compareSelector').remove();
       document.getElementById('valChoiceSelector').remove();
+      visButton.setAttribute('disabled', true);
+      
       
 
       table = [
@@ -380,6 +431,8 @@
       document.getElementById('statSelector').remove();
       document.getElementById('compareSelector').remove();
       document.getElementById('valChoiceSelector').remove();
+      visButton.setAttribute('disabled', true);
+      
       
 
       table = [
@@ -415,6 +468,8 @@
       document.getElementById('statSelector').remove();
       document.getElementById('compareSelector').remove();
       document.getElementById('valChoiceSelector').remove();
+      visButton.setAttribute('disabled', true);
+      
       
 
       table = [
@@ -453,6 +508,8 @@
       document.getElementById('statSelector').remove();
       document.getElementById('compareSelector').remove();
       document.getElementById('valChoiceSelector').remove();
+      visButton.setAttribute('disabled', true);
+      
       
 
       table = [
@@ -477,6 +534,8 @@
       document.getElementById('statSelector').remove();
       document.getElementById('compareSelector').remove();
       document.getElementById('valChoiceSelector').remove();
+      visButton.setAttribute('disabled', true);
+      
       
 
       table = [
@@ -502,6 +561,7 @@
       document.getElementById('statSelector').remove();
       document.getElementById('compareSelector').remove();
       document.getElementById('valChoiceSelector').remove();
+      visButton.setAttribute('disabled', true);
       
 
       table = [
@@ -521,7 +581,9 @@
 
     } else if (tableSelector.value==='select data'){
       
+      visButton.setAttribute('disabled', true);
       clearDropDowns();
+            
     } 
   });
 
