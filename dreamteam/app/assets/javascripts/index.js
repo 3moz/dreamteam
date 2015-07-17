@@ -619,31 +619,41 @@ visButton.addEventListener('click', function(){
   });
   xhr.send();
 
+  
+
   var xAxSelector = document.createElement('select');  
   xAxSelector.setAttribute('id','xAxSelector');
   visArea.appendChild(xAxSelector);
-
+  
   var yAxSelector = document.createElement('select');
   yAxSelector.setAttribute('id','yAxSelector');
-  visArea.appendChild(yAxSelector);   
+  visArea.appendChild(yAxSelector);     
 
   var axisSelectorCreate = function(tableArr){
+
+    var xTableArr = tableArr.map(function(option){return option;});
+    var yTableArr = tableArr.map(function(option){return option;});
+
+    xTableArr.unshift('Select X-Axis Metric');
+    yTableArr.unshift('Select Y-Axis Metric');
 
     visArea.appendChild(xAxSelector);
     visArea.appendChild(yAxSelector);
 
-    tableArr.forEach(function(column){
+    xTableArr.forEach(function(column){
       
       var option = document.createElement('option');
       option.setAttribute('value', column);
       option.setAttribute('label', column);
       xAxSelector.appendChild(option);
+    });
+
+    yTableArr.forEach(function(column){
 
       var option = document.createElement('option');
       option.setAttribute('value', column);
       option.setAttribute('label', column);
       yAxSelector.appendChild(option);
-
     });
   } 
 
@@ -666,7 +676,6 @@ visButton.addEventListener('click', function(){
       document.getElementById('yAxSelector').remove();
 
       var table = [
-      'select metric',
       'team_code',
       'team_location',
       'team_name',
@@ -681,7 +690,6 @@ visButton.addEventListener('click', function(){
       document.getElementById('yAxSelector').remove();      
       
       var table = [
-      'select metric',
       'player_code',
       'first_name',
       'last_name',
@@ -703,7 +711,6 @@ visButton.addEventListener('click', function(){
       document.getElementById('yAxSelector').remove();       
 
       var table = [
-      'select metric',
       'team_code',
       'year',
       'team_league',
@@ -748,7 +755,6 @@ visButton.addEventListener('click', function(){
       document.getElementById('yAxSelector').remove();     
 
       table = [
-      'select metric',
       'player_code',
       'year',
       'first_name',
@@ -782,7 +788,6 @@ visButton.addEventListener('click', function(){
       document.getElementById('yAxSelector').remove();      
 
       table = [
-      'select metric',
       'player_code',
       'first_name',
       'last_name',
@@ -814,7 +819,6 @@ visButton.addEventListener('click', function(){
       document.getElementById('yAxSelector').remove();      
 
       table = [
-      'select metric',
       'player_code',
       'year',
       'first_name',
@@ -848,7 +852,6 @@ visButton.addEventListener('click', function(){
       document.getElementById('yAxSelector').remove();      
 
       table = [
-      'select metric',
       'player_code',
       'first_name',
       'last_name',
@@ -880,7 +883,6 @@ visButton.addEventListener('click', function(){
       document.getElementById('yAxSelector').remove();       
 
       table = [
-      'select metric',
       'player_code',
       'year',
       'first_name',
@@ -914,7 +916,6 @@ visButton.addEventListener('click', function(){
       document.getElementById('yAxSelector').remove();      
 
       table = [
-      'select metric',
       'draft_year',
       'draft_round',
       'selection',
@@ -934,7 +935,6 @@ visButton.addEventListener('click', function(){
       document.getElementById('yAxSelector').remove();      
 
       table = [
-      'select metric',
       'coach_code',
       'year',
       'yr_order',
@@ -955,7 +955,6 @@ visButton.addEventListener('click', function(){
       document.getElementById('yAxSelector').remove();      
 
       table = [
-      'select metric',
       'coach_code',
       'first_name',
       'last_name',
