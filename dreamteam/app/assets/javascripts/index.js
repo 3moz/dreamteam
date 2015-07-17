@@ -587,6 +587,40 @@
     } 
   });
 
+
+  visButton.addEventListener('click',function(){
+    console.log('vis button hit');
+
+    var table = tableSelector.value;
+
+    var query = 'select * from '+
+    tableSelector.value+
+    ' where '+
+    statSelector.value+
+    ' '+
+    compareSelector.value+
+    ' '+
+    valChoiceSelector.value+
+    ';';
+
+    console.log(query);  
+
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', location.origin+'/'+table+'/'+query);
+    xhr.addEventListener('load', function(){
+
+      console.log('hi');
+
+      response = JSON.parse(xhr.responseText);//JSON object of all returned records
+
+      console.log(response);
+      console.log(response.length);
+
+    });
+    xhr.send();
+
+  });
+
   // var dropDownSubmit = document.getElementById('dropDownSubmit');
   // dropDownSubmit.addEventListener('click', function(){
   //   var params = JSON.stringify([tableSelect.value, team_seasonSelect.value, yearSelect.value]);
@@ -625,15 +659,6 @@
     });
     xhr.send();
   }
-
-  // var obtainData = function(compSearch){//run DB query using input string from comp 
-  //   var xhr = new XMLHttpRequest();
-  //   xhr.open('get', location.origin+'/comparisons.json');
-  //   xhr.addEventListener('load', function(){
-  //     var comps = JSON.parse(xhr.responseText);
-  //     comps.for
-  //   })
-  // }
 
   var deleteComp = function(){
 
