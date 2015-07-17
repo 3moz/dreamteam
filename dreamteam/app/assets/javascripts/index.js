@@ -589,9 +589,16 @@
 
 
   visButton.addEventListener('click',function(){
+    
     console.log('vis button hit');
 
-    var table = tableSelector.value;
+    var valChoice
+
+    if (typeof(valChoiceSelector.value)==='string'){
+      valChoice = '\''+valChoiceSelector.value+'\'';  
+    } else {
+      valChoice = valChoiceSelector.value;
+    }
 
     var query = 'select * from '+
     tableSelector.value+
@@ -600,21 +607,20 @@
     ' '+
     compareSelector.value+
     ' '+
-    valChoiceSelector.value+
+    valChoice+
     ';';
 
     console.log(query);  
 
     var xhr = new XMLHttpRequest();
-    xhr.open('GET', location.origin+'/'+table+'/'+query);
+    xhr.open('GET', location.origin+'/'+tableSelector.value+'/'+query);
     xhr.addEventListener('load', function(){
-
-      console.log('hi');
 
       response = JSON.parse(xhr.responseText);//JSON object of all returned records
 
       console.log(response);
-      console.log(response.length);
+      console.log(response.length+" records returned");
+
 
     });
     xhr.send();
