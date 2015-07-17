@@ -607,20 +607,6 @@ visButton.addEventListener('click', function(){
 
   console.log(query);
 
-  var xhr = new XMLHttpRequest();
-  xhr.open('GET', location.origin+'/'+tableSelector.value+'/'+query);
-  xhr.addEventListener('load', function(){
-
-    response = JSON.parse(xhr.responseText);//JSON object of all returned records
-
-    console.log(response);
-    console.log(response.length+" records returned");
-
-  });
-  xhr.send();
-
-  
-
   var xAxSelector = document.createElement('select');  
   xAxSelector.setAttribute('id','xAxSelector');
   visArea.appendChild(xAxSelector);
@@ -656,17 +642,6 @@ visButton.addEventListener('click', function(){
       yAxSelector.appendChild(option);
     });
   } 
-
-  // var clearAxesSelectors = function(){
-  //   //remove axes dropdowns
-  //   console.log('hi');
-
-  //   document.getElementById('xAxSelector').remove();
-  //   visArea.removeChild(xAxSelector);
-
-  //   document.getElementById('yAxSelector').remove();
-  //   visArea.removeChild(yAxSelector);
-  // }
 
   var axesPopulate = function(){
 
@@ -967,12 +942,7 @@ visButton.addEventListener('click', function(){
       axisSelectorCreate(table);
 
     } 
-    // else if (tableSelector.value==='select data'){
-
-    //   clearAxesSelectors();
-
-    // }
-
+    
   }; //end function definition axesPopulate();
 
   
@@ -982,6 +952,18 @@ visButton.addEventListener('click', function(){
     axesPopulate();
   });//repopulate axes whenever table selector value changes
 
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', location.origin+'/'+tableSelector.value+'/'+query);
+  xhr.addEventListener('load', function(){
+
+    response = JSON.parse(xhr.responseText);//JSON object of all returned records
+
+    console.log(response);
+    console.log(response.length+" records returned");
+
+  });
+  xhr.send();
+  
 });//end of vis button event listener
 
 });//end of DOMCONTENTLOADED event listener
