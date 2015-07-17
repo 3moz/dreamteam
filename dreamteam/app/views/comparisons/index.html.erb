@@ -13,16 +13,17 @@
 
 <br>
 
+<h3>Visualizations</h3>
 <div id='visArea'>
 </div>  
 
-<form method='POST' action='/comparisons'>
+<!-- <form method='POST' action='/comparisons'>
 
   <label for='name'>Compare:</label>
   <input name='comparison'>
   <input name="authenticity_token" value="<%= form_authenticity_token() %>" type="hidden">
   <button id='addComp'>Compare</button>
-</form>
+</form> -->
 
 <form method='POST' action='/session'>
 
@@ -31,16 +32,5 @@
   <button id='logout'>Log Out</button>
 
 </form>
-
-
-<h1>All Saved Comparisons</h1>
-
-<div id='compList'>
-</div>
-
-<h1>Comparison Visuals</h1>
-
-<div id='visuals'>
-</div>
 
 
