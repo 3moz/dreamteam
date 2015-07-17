@@ -180,9 +180,7 @@
     selectArea.removeChild(compareSelector);
     document.getElementById('valChoiceSelector').remove();
     selectArea.removeChild(valChoiceSelector);
-    document.getElementById('visButton').remove();
-    selectArea.removeChild(visButton);
-
+    
   }
 
   var visButtonValuesChecker = function(){
@@ -591,6 +589,8 @@
 
 visButton.addEventListener('click', function(){
 
+  tableSelector = document.getElementById('tableSelector');
+
   console.log('vis button hit');
 
   var valChoice = '\''+valChoiceSelector.value+'\'' //get rid of char / num issue for SQL commands
@@ -647,329 +647,345 @@ visButton.addEventListener('click', function(){
     });
   } 
 
-  var clearAxesSelectors = function(){
-    //remove axes dropdowns
-    document.getElementById('xAxSelector').remove();
-    visArea.removeChild(xAxSelector);
-    document.getElementById('yAxSelector').remove();
-    visArea.removeChild(yAxSelector);
-  }
+  // var clearAxesSelectors = function(){
+  //   //remove axes dropdowns
+  //   console.log('hi');
 
-  if (tableSelector.value==='teams'){ //need to go through this in order to populate x-/y-axis metric selectors
+  //   document.getElementById('xAxSelector').remove();
+  //   visArea.removeChild(xAxSelector);
 
-    document.getElementById('xAxSelector').remove();
-    document.getElementById('yAxSelector').remove();
+  //   document.getElementById('yAxSelector').remove();
+  //   visArea.removeChild(yAxSelector);
+  // }
 
-    var table = [
-    'select metric',
-    'team_code',
-    'team_location',
-    'team_name',
-    'team_league'
-    ]
+  var axesPopulate = function(){
 
-    axisSelectorCreate(table);
+    if (tableSelector.value==='teams'){ //need to go through this in order to populate x-/y-axis metric selectors
 
-  } else if (tableSelector.value==='players'){
+      document.getElementById('xAxSelector').remove();
+      document.getElementById('yAxSelector').remove();
 
-    document.getElementById('xAxSelector').remove();
-    document.getElementById('yAxSelector').remove();      
-    
-    var table = [
-    'select metric',
-    'player_code',
-    'first_name',
-    'last_name',
-    'position',
-    'first_season',
-    'last_season',
-    'height_ft',
-    'height_in',
-    'weight',
-    'school',
-    'b_day'
-    ]
+      var table = [
+      'select metric',
+      'team_code',
+      'team_location',
+      'team_name',
+      'team_league'
+      ]
 
-    axisSelectorCreate(table);
+      axisSelectorCreate(table);
 
-  } else if (tableSelector.value==='team_seasons'){
+    } else if (tableSelector.value==='players'){
 
-    document.getElementById('xAxSelector').remove();
-    document.getElementById('yAxSelector').remove();       
+      document.getElementById('xAxSelector').remove();
+      document.getElementById('yAxSelector').remove();      
+      
+      var table = [
+      'select metric',
+      'player_code',
+      'first_name',
+      'last_name',
+      'position',
+      'first_season',
+      'last_season',
+      'height_ft',
+      'height_in',
+      'weight',
+      'school',
+      'b_day'
+      ]
 
-    var table = [
-    'select metric',
-    'team_code',
-    'year',
-    'team_league',
-    'o_fgm',
-    'o_fga',
-    'o_ftm',
-    'o_fta',
-    'o_oreb',
-    'o_dreb',
-    'o_asts',
-    'o_pf',
-    'o_stl',
-    'o_to',
-    'o_blk',
-    'o_3pm',
-    'o_3pa',
-    'o_pts',
-    'd_fgm',
-    'd_fga',
-    'd_ftm',
-    'd_fta',
-    'd_oreb',
-    'd_dreb',
-    'd_asts',
-    'd_pf',
-    'd_stl',
-    'd_to',
-    'd_blk',
-    'd_3pm',
-    'd_3pa',
-    'd_pts',
-    'pace',
-    'won',
-    'lost'
-    ] 
+      axisSelectorCreate(table);
 
-    axisSelectorCreate(table);
+    } else if (tableSelector.value==='team_seasons'){
 
-  } else if (tableSelector.value==='player_regular_seasons'){
+      document.getElementById('xAxSelector').remove();
+      document.getElementById('yAxSelector').remove();       
 
-    document.getElementById('xAxSelector').remove();
-    document.getElementById('yAxSelector').remove();     
+      var table = [
+      'select metric',
+      'team_code',
+      'year',
+      'team_league',
+      'o_fgm',
+      'o_fga',
+      'o_ftm',
+      'o_fta',
+      'o_oreb',
+      'o_dreb',
+      'o_asts',
+      'o_pf',
+      'o_stl',
+      'o_to',
+      'o_blk',
+      'o_3pm',
+      'o_3pa',
+      'o_pts',
+      'd_fgm',
+      'd_fga',
+      'd_ftm',
+      'd_fta',
+      'd_oreb',
+      'd_dreb',
+      'd_asts',
+      'd_pf',
+      'd_stl',
+      'd_to',
+      'd_blk',
+      'd_3pm',
+      'd_3pa',
+      'd_pts',
+      'pace',
+      'won',
+      'lost'
+      ] 
 
-    table = [
-    'select metric',
-    'player_code',
-    'year',
-    'first_name',
-    'last_name',
-    'team',
-    'league',
-    'gp',
-    'minutes',
-    'pts',
-    'oreb',
-    'dreb',
-    'reb',
-    'asts',
-    'stl',
-    'blk',
-    'turnover',
-    'pf',
-    'fga',
-    'fgm',
-    'fta',
-    'ftm',
-    'tpa',
-    'tpm'
-    ]
+      axisSelectorCreate(table);
 
-    axisSelectorCreate(table); 
+    } else if (tableSelector.value==='player_regular_seasons'){
 
-  } else if (tableSelector.value==='player_playoffs_careers'){
+      document.getElementById('xAxSelector').remove();
+      document.getElementById('yAxSelector').remove();     
 
-    document.getElementById('xAxSelector').remove();
-    document.getElementById('yAxSelector').remove();      
+      table = [
+      'select metric',
+      'player_code',
+      'year',
+      'first_name',
+      'last_name',
+      'team',
+      'league',
+      'gp',
+      'minutes',
+      'pts',
+      'oreb',
+      'dreb',
+      'reb',
+      'asts',
+      'stl',
+      'blk',
+      'turnover',
+      'pf',
+      'fga',
+      'fgm',
+      'fta',
+      'ftm',
+      'tpa',
+      'tpm'
+      ]
 
-    table = [
-    'select metric',
-    'player_code',
-    'first_name',
-    'last_name',
-    'player_league',
-    'gp',
-    'minutes',
-    'pts',
-    'drb',
-    'orb',
-    'reb',
-    'asts',
-    'stl',
-    'blk',
-    'turnover',
-    'pf',
-    'fga',
-    'fgm',
-    'fta',
-    'ftm',
-    'tpa',
-    'tpm'
-    ]
+      axisSelectorCreate(table); 
 
-    axisSelectorCreate(table); 
+    } else if (tableSelector.value==='player_playoffs_careers'){
 
-  } else if (tableSelector.value==='player_playoffs'){
+      document.getElementById('xAxSelector').remove();
+      document.getElementById('yAxSelector').remove();      
 
-    document.getElementById('xAxSelector').remove();
-    document.getElementById('yAxSelector').remove();      
+      table = [
+      'select metric',
+      'player_code',
+      'first_name',
+      'last_name',
+      'player_league',
+      'gp',
+      'minutes',
+      'pts',
+      'drb',
+      'orb',
+      'reb',
+      'asts',
+      'stl',
+      'blk',
+      'turnover',
+      'pf',
+      'fga',
+      'fgm',
+      'fta',
+      'ftm',
+      'tpa',
+      'tpm'
+      ]
 
-    table = [
-    'select metric',
-    'player_code',
-    'year',
-    'first_name',
-    'last_name',
-    'player_team',
-    'player_league',
-    'gp',
-    'minutes',
-    'pts',
-    'dreb',
-    'oreb',
-    'reb',
-    'asts',
-    'stl',
-    'blk',
-    'turnover',
-    'pf',
-    'fga',
-    'fgm',
-    'fta',
-    'ftm',
-    'tpa',
-    'tpm'
-    ]
+      axisSelectorCreate(table); 
 
-    axisSelectorCreate(table);
+    } else if (tableSelector.value==='player_playoffs'){
 
-  } else if (tableSelector.value==='player_careers'){
+      document.getElementById('xAxSelector').remove();
+      document.getElementById('yAxSelector').remove();      
 
-    document.getElementById('xAxSelector').remove();
-    document.getElementById('yAxSelector').remove();      
+      table = [
+      'select metric',
+      'player_code',
+      'year',
+      'first_name',
+      'last_name',
+      'player_team',
+      'player_league',
+      'gp',
+      'minutes',
+      'pts',
+      'dreb',
+      'oreb',
+      'reb',
+      'asts',
+      'stl',
+      'blk',
+      'turnover',
+      'pf',
+      'fga',
+      'fgm',
+      'fta',
+      'ftm',
+      'tpa',
+      'tpm'
+      ]
 
-    table = [
-    'select metric',
-    'player_code',
-    'first_name',
-    'last_name',
-    'player_league',
-    'gp',
-    'minutes',
-    'pts',
-    'oreb',
-    'dreb',
-    'reb',
-    'asts',
-    'stl',
-    'blk',
-    'turnover',
-    'pf',
-    'fga',
-    'fgm',
-    'fta',
-    'ftm',
-    'tpa',
-    'tpm'
-    ]
+      axisSelectorCreate(table);
 
-    axisSelectorCreate(table);
+    } else if (tableSelector.value==='player_careers'){
 
-  } else if (tableSelector.value==='player_allstars'){
+      document.getElementById('xAxSelector').remove();
+      document.getElementById('yAxSelector').remove();      
 
-    document.getElementById('xAxSelector').remove();
-    document.getElementById('yAxSelector').remove();       
+      table = [
+      'select metric',
+      'player_code',
+      'first_name',
+      'last_name',
+      'player_league',
+      'gp',
+      'minutes',
+      'pts',
+      'oreb',
+      'dreb',
+      'reb',
+      'asts',
+      'stl',
+      'blk',
+      'turnover',
+      'pf',
+      'fga',
+      'fgm',
+      'fta',
+      'ftm',
+      'tpa',
+      'tpm'
+      ]
 
-    table = [
-    'select metric',
-    'player_code',
-    'year',
-    'first_name',
-    'last_name',
-    'conference',
-    'player_league',
-    'gp',
-    'minutes',
-    'pts',
-    'dreb',
-    'oreb',
-    'reb',
-    'asts',
-    'stl',
-    'blk',
-    'turnover',
-    'pf',
-    'fga',
-    'fgm',
-    'fta',
-    'ftm',
-    'tpa',
-    'tpm'
-    ]
+      axisSelectorCreate(table);
 
-    axisSelectorCreate(table);
+    } else if (tableSelector.value==='player_allstars'){
 
-  } else if (tableSelector.value==='drafts'){
+      document.getElementById('xAxSelector').remove();
+      document.getElementById('yAxSelector').remove();       
 
-    document.getElementById('xAxSelector').remove();
-    document.getElementById('yAxSelector').remove();      
+      table = [
+      'select metric',
+      'player_code',
+      'year',
+      'first_name',
+      'last_name',
+      'conference',
+      'player_league',
+      'gp',
+      'minutes',
+      'pts',
+      'dreb',
+      'oreb',
+      'reb',
+      'asts',
+      'stl',
+      'blk',
+      'turnover',
+      'pf',
+      'fga',
+      'fgm',
+      'fta',
+      'ftm',
+      'tpa',
+      'tpm'
+      ]
 
-    table = [
-    'select metric',
-    'draft_year',
-    'draft_round',
-    'selection',
-    'team',
-    'first_name',
-    'last_name',
-    'player_code',
-    'drafted_from',
-    'league'
-    ]
+      axisSelectorCreate(table);
 
-    axisSelectorCreate(table);
+    } else if (tableSelector.value==='drafts'){
 
-  } else if (tableSelector.value==='coaches'){
+      document.getElementById('xAxSelector').remove();
+      document.getElementById('yAxSelector').remove();      
 
-    document.getElementById('xAxSelector').remove();
-    document.getElementById('yAxSelector').remove();      
+      table = [
+      'select metric',
+      'draft_year',
+      'draft_round',
+      'selection',
+      'team',
+      'first_name',
+      'last_name',
+      'player_code',
+      'drafted_from',
+      'league'
+      ]
 
-    table = [
-    'select metric',
-    'coach_code',
-    'year',
-    'yr_order',
-    'first_name',
-    'last_name',
-    'season_win',
-    'season_loss',
-    'playoff_win',
-    'playoff_loss',
-    'team'
-    ]
+      axisSelectorCreate(table);
 
-    axisSelectorCreate(table);
+    } else if (tableSelector.value==='coaches'){
 
-  } else if (tableSelector.value==='coach_careers'){
+      document.getElementById('xAxSelector').remove();
+      document.getElementById('yAxSelector').remove();      
 
-    document.getElementById('xAxSelector').remove();
-    document.getElementById('yAxSelector').remove();      
+      table = [
+      'select metric',
+      'coach_code',
+      'year',
+      'yr_order',
+      'first_name',
+      'last_name',
+      'season_win',
+      'season_loss',
+      'playoff_win',
+      'playoff_loss',
+      'team'
+      ]
 
-    table = [
-    'select metric',
-    'coach_code',
-    'first_name',
-    'last_name',
-    'season_win',
-    'season_loss',
-    'playoff_win',
-    'playoff_loss'
-    ]
+      axisSelectorCreate(table);
 
-    axisSelectorCreate(table);
+    } else if (tableSelector.value==='coach_careers'){
 
-  } else if (tableSelector.value==='select data'){
+      document.getElementById('xAxSelector').remove();
+      document.getElementById('yAxSelector').remove();      
 
-    clearAxesSelectors();
+      table = [
+      'select metric',
+      'coach_code',
+      'first_name',
+      'last_name',
+      'season_win',
+      'season_loss',
+      'playoff_win',
+      'playoff_loss'
+      ]
 
-  }
-});
+      axisSelectorCreate(table);
 
-});//end of DOMCONTENTLOADED
+    } 
+    // else if (tableSelector.value==='select data'){
+
+    //   clearAxesSelectors();
+
+    // }
+
+  }; //end function definition axesPopulate();
+
+  
+  axesPopulate();
+
+  tableSelector.addEventListener('change', function(){
+    axesPopulate();
+  });//repopulate axes whenever table selector value changes
+
+});//end of vis button event listener
+
+});//end of DOMCONTENTLOADED event listener
 
   // var dropDownSubmit = document.getElementById('dropDownSubmit');
   // dropDownSubmit.addEventListener('click', function(){
