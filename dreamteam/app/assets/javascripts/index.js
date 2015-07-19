@@ -641,8 +641,21 @@ visButton.addEventListener('click', function(){
       option.setAttribute('label', column);
       yAxSelector.appendChild(option);
     });
+  }
+
+  var axesValueCheck = function(){
+    if ((xAxSelector.value)&&(yAxSelector.value)&&(xAxSelector.value!=="Select X-Axis Metric")&&(yAxSelector.value!=="Select Y-Axis Metric"))
+    {
+      console.log("both axes selectors have values\n x-axis:"
+        +xAxSelector.value+", y-axis:"+yAxSelector.value);
+      
+      graphData();//needs to be defined - this will be the D3 building
+    } else {console.log("one or more axis metrics still need to be specified");}
   } 
 
+  var graphData = function(){
+    //"D3: The Mighty Data Visualization"
+  }
   var axesPopulate = function(){
 
     if (tableSelector.value==='teams'){ //need to go through this in order to populate x-/y-axis metric selectors
@@ -952,6 +965,14 @@ visButton.addEventListener('click', function(){
     axesPopulate();
   });//repopulate axes whenever table selector value changes
 
+  xAxSelector.addEventListener('change', function(){
+    axesValueCheck();
+  });//the xAxis selector needs to have a value in order to know what metric the x axis measures
+
+  yAxSelector.addEventListener('change', function(){
+    axesValueCheck();
+  });//the yAxis selector needs to have a value in order to know what metric the y axis measures
+
   var xhr = new XMLHttpRequest();
   xhr.open('GET', location.origin+'/'+tableSelector.value+'/'+query);
   xhr.addEventListener('load', function(){
@@ -963,7 +984,9 @@ visButton.addEventListener('click', function(){
 
   });
   xhr.send();
-  
+
+
+
 });//end of vis button event listener
 
 });//end of DOMCONTENTLOADED event listener
