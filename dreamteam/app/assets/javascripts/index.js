@@ -676,10 +676,10 @@ visButton.addEventListener('click', function(){
 
     console.log(returnedObjects);
 
-    var h = 500;
-    var w = 800;
+    var h = 450;
+    var w = 850;
 
-    var padding = 40;
+    var padding = 50;
 
     var numDataPoints = returnedObjects.length;
 
@@ -699,16 +699,16 @@ visButton.addEventListener('click', function(){
     //of the yMetric.
 
     var xScale = d3.scale.linear() //x coord of data point
-      .domain([0, d3.max(dataSet,function(d){ return d[0]; })])
+      .domain([d3.min(dataSet, function(d){ return d[0]; }),d3.max(dataSet, function(d){ return d[0]; })])
       .range([padding, w-padding*2]);
 
     var yScale = d3.scale.linear() //y coord of data point
-      .domain([0, d3.max(dataSet, function(d){ return d[1]; })])
+      .domain([d3.min(dataSet, function(d){ return d[1]; }),d3.max(dataSet, function(d){ return d[1]; })])
       .range([h-padding, padding]);
 
     var rScale = d3.scale.linear() //magnitude of radius of each data point
-      .domain([0, d3.max(dataSet, function(d){ return d[1]; })])
-      .range([2,20]);
+      .domain([d3.min(dataSet, function(d){ return d[1]; }),d3.max(dataSet, function(d){ return d[1]; })])
+      .range([2,15]);
 
     var xAxis = d3.svg.axis()//define x axis
       .scale(xScale)
