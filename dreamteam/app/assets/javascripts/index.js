@@ -647,6 +647,14 @@ visButton.addEventListener('click', function(){
 
     if ((xAxSelector.value)&&(yAxSelector.value)&&(xAxSelector.value!=="Select X-Axis Metric")&&(yAxSelector.value!=="Select Y-Axis Metric"))
     {
+      if(document.getElementById('visual')){
+        document.getElementById('visual').remove()
+        visArea.removeChild('visual');
+      }
+
+    // document.getElementById('valChoiceSelector').remove();
+    // selectArea.removeChild(valChoiceSelector);
+
       console.log("both axes selectors have values\n x-axis:"
         +xAxSelector.value+", y-axis:"+yAxSelector.value);
       
@@ -722,6 +730,7 @@ visButton.addEventListener('click', function(){
 
     var svg = d3.select(document.getElementById('visArea'))
       .append('svg')
+      .attr('id', 'visual')
       .attr('width', w)
       .attr('height', h)
       .call(responsivefy);//creates responsiveness on the svg element by creating a 'viewbox'
