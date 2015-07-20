@@ -645,11 +645,13 @@ visButton.addEventListener('click', function(){
 
     console.log(query);
 
-    if ((xAxSelector.value)&&(yAxSelector.value)&&(xAxSelector.value!=="Select X-Axis Metric")&&(yAxSelector.value!=="Select Y-Axis Metric"))
+    if ((xAxSelector.value&&yAxSelector.value)&&
+      (xAxSelector.value!=="Select X-Axis Metric")&&
+      (yAxSelector.value!=="Select Y-Axis Metric"))
     {
       if(document.getElementById('visual')){
         document.getElementById('visual').remove()
-        visArea.removeChild('visual');
+        graphArea.removeChild('visual');
       }
 
     // document.getElementById('valChoiceSelector').remove();
@@ -728,7 +730,7 @@ visButton.addEventListener('click', function(){
       .orient('left')
       .ticks(10);
 
-    var svg = d3.select(document.getElementById('visArea'))
+    var svg = d3.select(document.getElementById('graphArea'))
       .append('svg')
       .attr('id', 'visual')
       .attr('width', w)
