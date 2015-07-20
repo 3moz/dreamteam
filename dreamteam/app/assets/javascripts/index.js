@@ -589,23 +589,7 @@
 
 visButton.addEventListener('click', function(){
 
-  tableSelector = document.getElementById('tableSelector');
-
   console.log('vis button hit');
-
-  var valChoice = '\''+valChoiceSelector.value+'\'' //get rid of char / num issue for SQL commands
-
-  var query = 'select * from '+ //build query
-  tableSelector.value+
-  ' where '+
-  statSelector.value+
-  ' '+
-  compareSelector.value+
-  ' '+
-  valChoice+
-  ';';
-
-  console.log(query);
 
   var xAxSelector = document.createElement('select');  
   xAxSelector.setAttribute('id','xAxSelector');
@@ -644,18 +628,154 @@ visButton.addEventListener('click', function(){
   }
 
   var axesValueCheck = function(){
+    
+    tableSelector = document.getElementById('tableSelector');
+
+    var valChoice = '\''+valChoiceSelector.value+'\'' //get rid of char / num issue for SQL commands
+
+    var query = 'select * from '+ //build query
+    tableSelector.value+
+    ' where '+
+    statSelector.value+
+    ' '+
+    compareSelector.value+
+    ' '+
+    valChoice+
+    ';';
+
+    console.log(query);
+
     if ((xAxSelector.value)&&(yAxSelector.value)&&(xAxSelector.value!=="Select X-Axis Metric")&&(yAxSelector.value!=="Select Y-Axis Metric"))
     {
       console.log("both axes selectors have values\n x-axis:"
         +xAxSelector.value+", y-axis:"+yAxSelector.value);
       
-      graphData();//needs to be defined - this will be the D3 building
-    } else {console.log("one or more axis metrics still need to be specified");}
-  } 
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', location.origin+'/'+tableSelector.value+'/'+query);
+      xhr.addEventListener('load', function(){
 
-  var graphData = function(){
-    //"D3: The Mighty Data Visualization"
+        response = JSON.parse(xhr.responseText);//JSON object of all returned records
+
+        console.log(response.length+" records returned");
+
+        graphData(response);//d3 visualization
+
+      });
+      xhr.send();
+
+    } else {console.log("one or more axis metrics still need to be specified");}
   }
+
+  var graphData = function(dataArr){
+
+    var returnedObjects = dataArr;
+
+    var dataSet = [];
+
+    console.log("graphData hit");
+
+    console.log(returnedObjects);
+
+    var h = 500;
+    var w = 800;
+
+    var padding = 40;
+
+    var numDataPoints = returnedObjects.length;
+
+    console.log(numDataPoints+" raw data objects");
+
+    var xMetric = xAxSelector.value;
+    var yMetric = yAxSelector.value;
+
+    for (var i = 0; i < numDataPoints; i++){
+      dataSet.push([returnedObjects[i][xMetric], returnedObjects[i][yMetric]]);
+    }
+
+    console.log(dataSet);
+    console.log("^^^ is the data set to visualize");
+    //each element of dataSet is a two element array where the first element is the value of the xMetric 
+    //of the given object (which is itself a record from the database), and the second element is the value
+    //of the yMetric.
+
+    var xScale = d3.scale.linear() //x coord of data point
+      .domain([0, d3.max(dataSet,function(d){ return d[0]; })])
+      .range([padding, w-padding*2]);
+
+    var yScale = d3.scale.linear() //y coord of data point
+      .domain([0, d3.max(dataSet, function(d){ return d[1]; })])
+      .range([h-padding, padding]);
+
+    var rScale = d3.scale.linear() //magnitude of radius of each data point
+      .domain([0, d3.max(dataSet, function(d){ return d[1]; })])
+      .range([2,20]);
+
+    var xAxis = d3.svg.axis()//define x axis
+      .scale(xScale)
+      .orient('bottom')
+      .ticks(10);
+    
+    var yAxis = d3.svg.axis()//define y axis
+      .scale(yScale)
+      .orient('left')
+      .ticks(10);
+
+    var svg = d3.select(document.getElementById('visArea'))
+      .append('svg')
+      .attr('width', w)
+      .attr('height', h)
+      .call(responsivefy);//creates responsiveness on the svg element by creating a 'viewbox'
+
+    svg.selectAll('circle')//draw circles for data points
+      .data(dataSet)
+      .enter()
+      .append('circle')
+      .attr('cx', function(d){ 
+        return xScale(d[0])
+      })
+      .attr('cy', function(d){
+        return yScale(d[1])
+      })
+      .attr('r', function(d){
+        return rScale(d[1]);
+      });
+
+    svg.append('g')
+      .attr('class','axis')
+      .attr('transform', 'translate(0,'+(h-padding)+')')
+      .call(xAxis);
+
+    svg.append('g')
+      .attr('class','axis')
+      .attr('transform', 'translate('+padding+',0)')
+      .call(yAxis);
+
+    function responsivefy(svg){
+      var svg = svg;
+      //get container + svg aspect ratio
+      var container = d3.select(svg.node().parentNode),
+        width = parseInt(svg.style('width')),
+        height = parseInt(svg.style('height')),
+        aspect = (width / height);
+
+      //add viewbox and preserveAspectRatio properties,
+      //and call resize so that svg resizes on initial page load
+
+      svg.attr('viewbox','0 0 '+width+' '+height)
+        .attr('preserveAspectRatio', 'xMidYMin')
+        .call(resize);
+
+      d3.select(window).on('resize.'+container.attr('id'), resize);
+
+      //get width of container and resize svg to fit it
+      function resize() {
+        var targetWidth = parseInt(container.style('width'));
+        svg.attr('width', targetWidth);
+        svg.attr('height', Math.round(targetWidth/aspect));
+      }//end resize
+    }//end responsivefy
+  }//end graphData 
+
   var axesPopulate = function(){
 
     if (tableSelector.value==='teams'){ //need to go through this in order to populate x-/y-axis metric selectors
@@ -972,20 +1092,6 @@ visButton.addEventListener('click', function(){
   yAxSelector.addEventListener('change', function(){
     axesValueCheck();
   });//the yAxis selector needs to have a value in order to know what metric the y axis measures
-
-  var xhr = new XMLHttpRequest();
-  xhr.open('GET', location.origin+'/'+tableSelector.value+'/'+query);
-  xhr.addEventListener('load', function(){
-
-    response = JSON.parse(xhr.responseText);//JSON object of all returned records
-
-    console.log(response);
-    console.log(response.length+" records returned");
-
-  });
-  xhr.send();
-
-
 
 });//end of vis button event listener
 

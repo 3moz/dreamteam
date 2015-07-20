@@ -1,36 +1,47 @@
-<h1>Create a New Comparison</h1>
+<!Doctype html>
+<head>
+  <h2>DreamTeam</h2>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
+</head>
+</script>
 
-<!-- <select id='tableSelect'></select>
-<select id='team_seasonSelect'></select>
-<select id='yearSelect'></select>
-<button id='dropDownSubmit'>submit</button>
- -->
-<!-- <br><br> -->
+<body>
+  <h2>Create a New Comparison</h2>
 
-<div id='selectArea'>
-<!--     option, value, label -->
-</div>
+  <!-- <select id='tableSelect'></select>
+  <select id='team_seasonSelect'></select>
+  <select id='yearSelect'></select>
+  <button id='dropDownSubmit'>submit</button>
+   -->
+  <!-- <br><br> -->
 
-<br>
+  <div id='selectArea'>
+  <!--     option, value, label -->
+  </div>
 
-<h3>Visualizations</h3>
-<div id='visArea'>
-</div>  
+  <br>
 
-<!-- <form method='POST' action='/comparisons'>
+  <h3>Visualizations</h3>
 
-  <label for='name'>Compare:</label>
-  <input name='comparison'>
-  <input name="authenticity_token" value="<%= form_authenticity_token() %>" type="hidden">
-  <button id='addComp'>Compare</button>
-</form> -->
+  <div id='visArea'>
+  </div>  
 
-<form method='POST' action='/session'>
+  <!-- <form method='POST' action='/comparisons'>
 
-  <input name='authenticity_token' value='<%= form_authenticity_token() %>' type='hidden'>
-  <input name='_method' value='DELETE' type='hidden'><br>
-  <button id='logout'>Log Out</button>
+    <label for='name'>Compare:</label>
+    <input name='comparison'>
+    <input name="authenticity_token" value="<%= form_authenticity_token() %>" type="hidden">
+    <button id='addComp'>Compare</button>
+  </form> -->
 
-</form>
+  <form method='POST' action='/session'>
+
+    <input name='authenticity_token' value='<%= form_authenticity_token() %>' type='hidden'>
+    <input name='_method' value='DELETE' type='hidden'><br>
+    <button id='logout'>Log Out</button>
+
+  </form>
+
+</body> 
 
 
