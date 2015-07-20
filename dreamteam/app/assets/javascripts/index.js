@@ -651,7 +651,7 @@ visButton.addEventListener('click', function(){
     {
       if(document.getElementById('visual')){
         document.getElementById('visual').remove()
-        graphArea.removeChild('visual');
+        // graphArea.removeChild('visual');
       }
 
     // document.getElementById('valChoiceSelector').remove();
