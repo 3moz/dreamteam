@@ -772,10 +772,8 @@ visButton.addEventListener('click', function(){
       .attr('transform', 'translate('+padding+',0)')
       .call(yAxis)
       .append('text')
-      .attr('transform', 'rotate(-90)')
-      .attr('y', .04*w)
-      .attr('dy', '.71em')
-      .style('text-anchor', 'end')
+      .attr('y', .05*w)
+      .style('text-anchor', 'beginning')
       .text('Y-Axis: '+ yMetric);
 
     function responsivefy(svg){
