@@ -676,7 +676,7 @@ visButton.addEventListener('click', function(){
     } else {console.log("one or more axis metrics still need to be specified");}
   }
 
-  var graphData = function(dataArr){
+  var graphData = function(dataArr){ //below begins the d3 implementation
 
     var returnedObjects = dataArr;
 
@@ -700,7 +700,7 @@ visButton.addEventListener('click', function(){
 
     for (var i = 0; i < numDataPoints; i++){
       dataSet.push([returnedObjects[i][xMetric], returnedObjects[i][yMetric]]);
-    }
+    }//creating the d3 array of x,y values
 
     console.log(dataSet);
     console.log("^^^ is the data set to visualize");
@@ -741,6 +741,7 @@ visButton.addEventListener('click', function(){
       .data(dataSet)
       .enter()
       .append('circle')
+      .attr('class','bubble')
       .attr('cx', function(d){ 
         return xScale(d[0])
       })
@@ -749,17 +750,29 @@ visButton.addEventListener('click', function(){
       })
       .attr('r', function(d){
         return rScale(d[1]);
-      });
+      })
 
     svg.append('g')
       .attr('class','axis')
       .attr('transform', 'translate(0,'+(h-padding)+')')
-      .call(xAxis);
+      .call(xAxis)
+      .append('text')
+      .attr('x', .8*w)
+      .attr('dx', '.71em')
+      .attr('y', .09*h)
+      .style('text-anchor', 'end')
+      .text('X-Axis: '+xMetric);
 
     svg.append('g')
       .attr('class','axis')
       .attr('transform', 'translate('+padding+',0)')
-      .call(yAxis);
+      .call(yAxis)
+      .append('text')
+      .attr('transform', 'rotate(-90)')
+      .attr('y', .04*w)
+      .attr('dy', '.71em')
+      .style('text-anchor', 'end')
+      .text('Y-Axis: '+ yMetric);
 
     function responsivefy(svg){
       var svg = svg;
@@ -773,7 +786,7 @@ visButton.addEventListener('click', function(){
       //and call resize so that svg resizes on initial page load
 
       svg.attr('viewbox','0 0 '+width+' '+height)
-        .attr('preserveAspectRatio', 'xMidYMin')
+        .attr('preserveAspectRatio', 'xMidYMid')
         .call(resize);
 
       d3.select(window).on('resize.'+container.attr('id'), resize);
