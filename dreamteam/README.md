@@ -2,16 +2,26 @@
 
 -tool for historical research on sports statistics
 
-##This app is far from complete. Here are things to be implented still:
+##Implemented:
 
--ability for user to create a comparison using drop downs instead of typing a sql query
+-User authentication
+
+-Custom rake tasks to import csv data into Rails DB
+
+-ability for user to create a comparison using drop downs
+
+-ability to search 11 different tables provided
+
+-data visualizations for returned results using D3
+
+**data graciously provided at no charge for research purposes at http://basketballreference.com/stats_download.htm**
+
+##Coming features:
 
 -ability for user saved queries to persist per user, not for all users.
 
--ability to search all tables, not just teams
-
 -hit google news for topical items regarding what the user has queried for
 
--data visualizations
-
 -styling
+
+-analyze sports other than basketball
