@@ -708,15 +708,15 @@ visButton.addEventListener('click', function(){
     //of the given object (which is itself a record from the database), and the second element is the value
     //of the yMetric.
 
-    var xScale = d3.scale.linear() //x coord of data point
+    var xScale = d3.scale.linear() //x scale of data subset
       .domain([d3.min(dataSet, function(d){ return d[0]; }),d3.max(dataSet, function(d){ return d[0]; })])
       .range([padding, w-padding*2]);
 
-    var yScale = d3.scale.linear() //y coord of data point
+    var yScale = d3.scale.linear() //x scale of data subset
       .domain([d3.min(dataSet, function(d){ return d[1]; }),d3.max(dataSet, function(d){ return d[1]; })])
       .range([h-padding, padding]);
 
-    var rScale = d3.scale.linear() //magnitude of radius of each data point
+    var rScale = d3.scale.linear() //r scale of data
       .domain([d3.min(dataSet, function(d){ return d[1]; }),d3.max(dataSet, function(d){ return d[1]; })])
       .range([2,15]);
 
@@ -741,6 +741,9 @@ visButton.addEventListener('click', function(){
       .data(dataSet)
       .enter()
       .append('circle')
+      .attr('fill', function(d){ 
+        return d3.interpolateLab("blue","red")(rScale(d[1])/15);//as radius increases, more red/less blue
+      })
       .attr('class','bubble')
       .attr('cx', function(d){ 
         return xScale(d[0])
@@ -751,6 +754,7 @@ visButton.addEventListener('click', function(){
       .attr('r', function(d){
         return rScale(d[1]);
       })
+
 
     svg.append('g')
       .attr('class','axis')
