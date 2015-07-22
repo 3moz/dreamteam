@@ -1,43 +1,89 @@
-<h1>DREAMTEAM</h1>
+<head>
+  <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.0/material.indigo-red.min.css" /> 
+  <script src="https://storage.googleapis.com/code.getmdl.io/1.0.0/material.min.js"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <!-- mobile -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
 
-<div id='user-box'>
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
 
-<h3>Already Have An Account? Sign In Here</h3>
+  <header class="mdl-layout__header">
+    <div class="mdl-layout__header-row">
+      <!-- Title -->
+      <span class="mdl-layout-title">DREAMTEAM</span>
+      <!-- Add spacer, to align navigation to the right -->
+      <div class="mdl-layout-spacer"></div>      
+    </div>
+  </header>
 
-  <% if @sign_in_errors %>
-    <span class="error" style:"color:red"><%=@sign_in_errors%></span>
-  <%end%>
+  <main class="mdl-layout__content">
+    <div class="page-content">
+    <br>
+    <br>
+        <div id='user-box' align='center'>
 
-  <form action='/session' method='POST'>
-    <label for = 'user_name'>Username:</label>
-    <input name = 'user_name' type='text'>
+        <% if @sign_in_errors %>
+          <span class="error"><%=@sign_in_errors%></span>
+        <%end%>
 
-    <label for = 'password'>Password:</label>
-    <input name = 'password' type = 'password'>
+        <form action='/session' method='POST'>
 
-    <input name = "authenticity_token" value = "<%= form_authenticity_token() %>" type = "hidden">
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            
+            <input class="mdl-textfield__input" name="user_name" type="text"/>
 
-    <button id="signIn">Sign In</button>
-  </form>
+            <label class="mdl-textfield__label" for="user_name">Username:</label>
 
-<h3> New? Create An Account!</h3>
+          </div>
 
-  <% if @sign_in_errors %>
-    <span class="error" style="color:red"><%=@sign_in_errors%></span>
-  <%end%>
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 
-  <form action='/users' method='POST'>
+            <input class="mdl-textfield__input" name="password" type="password"/>
 
-    <label for = "user_name">Username:</label>
-    <input name = "user_name" type = "text">
+            <label class="mdl-textfield__label" for="password">Password:</label>
 
-    <label for = "password">Password:</label>
-    <input name = "password" type = "password">
+            <input name="authenticity_token" value="<%=form_authenticity_token()%>" type="hidden"/>
+          
+          </div>
 
-    <input name = "authenticity_token" value="<%= form_authenticity_token() %>" type="hidden">
+          <button class="mdl-button mdl-js-button mdl-button--primary" id="signIn">Sign In</button>
 
-    <button id = "signUp">Create</button>
+        </form>
 
-  </form>
+      <h6> New? Create An Account!</h6>
 
+        <form action='/users' method='POST'>
+
+           <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            
+            <input class="mdl-textfield__input" name="user_name" type="text"/>
+
+            <label class="mdl-textfield__label" for="user_name">Username:</label>
+
+          </div>
+
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+
+            <input class="mdl-textfield__input" name="password" type="password"/>
+
+            <label class="mdl-textfield__label" for="password">Password:</label>
+
+            <input name="authenticity_token" value="<%=form_authenticity_token()%>" type="hidden"/>
+          
+          </div>
+
+          <button class="mdl-button mdl-js-button mdl-button--primary" id = "signUp">Create</button>
+
+        </form>
+        <!-- Simple Tooltip -->
+
+        <div id="tt1" class="icon material-icons">info</div>
+        <div class="mdl-tooltip" for="tt1">
+        This site supports username and password authentication by the server - try it! - but you can sign in with username = 'user' and password = 'password' if you'd like :)
+        </div>
+
+      </div>
+    </div>
+  </main>
 </div>
