@@ -29,7 +29,7 @@
   visButton.setAttribute('disabled', true);
   visButton.setAttribute('class', "mdl-button mdl-js-button mdl-button--primary")
   
-
+  $('#p2').hide();
 
   var tables = [
   'select data',
@@ -69,6 +69,8 @@
     valChoiceSelector.setAttribute('id','valChoiceSelector');
     selectArea.appendChild(valChoiceSelector);
 
+    var progressBar = $(".mdl-js-progress");
+
     var statSelectorCreate = function(tableArr){
 
       selectArea.appendChild(statSelector);
@@ -97,7 +99,7 @@
     }
 
     var valChoiceSelectorCreate = function(){
-
+      
       //this will take the value of tableSelector (table) and statSelector.value, and
       //make an ajax request to 'select * from [table]' and then
       //with the resulting data, obtain a list of possible values under the column of
@@ -106,10 +108,13 @@
 
       statSelector.addEventListener('change', function(){
 
+
         if (statSelector.value ==='select metric'){
           valChoiceSelector.innerHTML = '';
           visButtonValuesChecker();
         } else {
+
+          $('#p2').show();
 
           visButtonValuesChecker();
 
@@ -122,7 +127,8 @@
           var xhr = new XMLHttpRequest
           xhr.open('GET', location.origin+'/'+table+'.json');
           xhr.addEventListener('load', function(){
-
+            
+            
             response = JSON.parse(xhr.responseText);//JSON object of all returned records
 
             metric = statSelector.value;
@@ -165,11 +171,11 @@
               option.setAttribute('label', valChoice);
               valChoiceSelector.appendChild(option);
             });
-
+            $('#p2').hide();
           });
 
         xhr.send();
-
+        
         }
       });
   }
@@ -654,7 +660,7 @@ visButton.addEventListener('click', function(){
         document.getElementById('visual').remove()
         // graphArea.removeChild('visual');
       }
-
+      $('#p2').show(); 
     // document.getElementById('valChoiceSelector').remove();
     // selectArea.removeChild(valChoiceSelector);
 
@@ -664,16 +670,17 @@ visButton.addEventListener('click', function(){
       var xhr = new XMLHttpRequest();
       xhr.open('GET', location.origin+'/'+tableSelector.value+'/'+query);
       xhr.addEventListener('load', function(){
+        
 
         response = JSON.parse(xhr.responseText);//JSON object of all returned records
 
         console.log(response.length+" records returned");
 
         graphData(response);//d3 visualization
-
+       
+        $('#p2').hide();
       });
-      xhr.send();
-
+      xhr.send();      
     } else {console.log("one or more axis metrics still need to be specified");}
   }
 
@@ -1123,6 +1130,13 @@ visButton.addEventListener('click', function(){
 });//end of vis button event listener
 
 });//end of DOMCONTENTLOADED event listener
+
+// $(document).bind("ajaxSend", function(){
+//   console.log("ajax listener")
+//   $('.mdl-js-progress').css("display","block")
+// }).bind("ajaxComplete", function(){
+//   $('.mdl-js-progress').css("display","none")
+// });
 
   // var dropDownSubmit = document.getElementById('dropDownSubmit');
   // dropDownSubmit.addEventListener('click', function(){
