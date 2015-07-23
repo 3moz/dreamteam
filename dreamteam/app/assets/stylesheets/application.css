@@ -15,11 +15,21 @@
  */
 
 .bubble{
-      fill-opacity: .5;
-      stroke: #fff;
-      stroke-width: .5px;
-    }
+  fill-opacity: .5;
+  stroke: #fff;
+  stroke-width: .5px;
+}
 
 h5{
   text-align: center;
+}
+
+#logout{
+  top: 90%;
+  left:15px;
+  position:fixed;
+}
+
+#graphArea{
+  width:100%;
 }

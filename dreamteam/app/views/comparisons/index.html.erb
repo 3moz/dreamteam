@@ -1,64 +1,86 @@
 <!DOCTYPE html>
 <head>
+  
   <!-- Google Material Design Lite -->
-  <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.0/material.indigo-red.min.css" /> 
-  <script src="https://storage.googleapis.com/code.getmdl.io/1.0.0/material.min.js"></script>
+  <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.0/material.indigo-red.min.css" />
+  
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  
   <!-- mobile -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- D3 -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
+  
+  <!-- MaterializeCSS -->
+  
+   <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css"> -->
+           
 </head>
 
-<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+<body>
+  <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
 
-  <header class="mdl-layout__header">
-    <div class="mdl-layout__header-row">
-      <!-- Title -->
-      <span class="mdl-layout-title">DREAMTEAM</span>
-      <!-- Add spacer, to align navigation to the right -->
-      <div class="mdl-layout-spacer"></div>
-        <nav class="mdl-navigation mdl-layout--large-screen-only">
-          <!-- <a class="mdl-navigation__link" href="">Link</a>
-          <a class="mdl-navigation__link" href="">Link</a>
-          <a class="mdl-navigation__link" href="">Link</a> -->
-          <form method='POST' action='/session'>
-            <input name='authenticity_token' value='<%= form_authenticity_token() %>' type='hidden'>
-            <input name='_method' value='DELETE' type='hidden'><br>
-            <!-- <a class="mdl-navigation__link" id="logout" href='/'>Log Out</a> -->
-            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent " id='logout'>Log Out</button>
+    <header class="mdl-layout__header">
+      <div class="mdl-layout__header-row">
+        <!-- Title -->
+        <span class="mdl-layout-title">DREAMTEAM</span>
+        <!-- Add spacer, to align navigation to the right -->
+        <div class="mdl-layout-spacer"></div>
+          <nav class="mdl-navigation mdl-layout--large-screen-only">
+          
+            <button id='about' class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent " id='logout'>about</button>
+
+         
           </form>
-      </nav>
+
+
+          </nav>
+        </div>
+
+    </header>
+
+    <main class="mdl-layout__content">
+    <div class="page-content">
+
+    <div id="p2" style='width:100%' class="mdl-progress mdl-js-progress mdl-progress__indeterminate "></div>
+
+    <h5>select data to work with</h5>
+
+    <div align='center' id='selectArea'>
     </div>
-  </header>
 
-  <main class="mdl-layout__content">
-  <div class="page-content">
+    <h5>choose metrics to visualize</h5>
 
-  <div id="p2" style='width:100%' class="mdl-progress mdl-js-progress mdl-progress__indeterminate "></div>
+    <div align='center' id='visArea'>
+    </div>
 
-  <h5>select data to work with</h5>
+    <div align='center' id='graphArea'>
+    </div> 
 
-  <div align='center' id='selectArea'>
-  </div>
+    <form method='POST' action='/session'>
+    <input name='authenticity_token' value='<%= form_authenticity_token() %>' type='hidden'>
+    <input name='_method' value='DELETE' type='hidden'><br>
+    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent " id='logout'>Log Out</button>
 
-  <h5>choose metrics to visualize</h5>
+    <!-- <form method='POST' action='/comparisons'>
 
-  <div align='center' id='visArea'>
-  </div>
+      <label for='name'>Compare:</label>
+      <input name='comparison'>
+      <input name="authenticity_token" value="<%= form_authenticity_token() %>" type="hidden">
+      <button id='addComp'>Compare</button>
+    </form> -->
 
-  <div align='center' id='graphArea'>
-  </div> 
+    </div>
+  </div>  
+</main>
+</div>
+<!-- Google Material Design -->
+<script src="https://storage.googleapis.com/code.getmdl.io/1.0.0/material.min.js"></script>
+<!-- D3 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
+<!-- JQuery -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<!-- MaterializeCSS -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>  -->
 
-  <!-- <form method='POST' action='/comparisons'>
 
-    <label for='name'>Compare:</label>
-    <input name='comparison'>
-    <input name="authenticity_token" value="<%= form_authenticity_token() %>" type="hidden">
-    <button id='addComp'>Compare</button>
-  </form> -->
-
-  </div>
-</div>  
-
+</body>
 

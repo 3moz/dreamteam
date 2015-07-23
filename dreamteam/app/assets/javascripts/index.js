@@ -741,7 +741,7 @@ visButton.addEventListener('click', function(){
       .orient('left')
       .ticks(10);
 
-    var svg = d3.select(document.getElementById('graphArea'))
+    var svg = d3.select("#graphArea")
       .append('svg')
       .attr('id', 'visual')
       .attr('width', w)
@@ -764,8 +764,7 @@ visButton.addEventListener('click', function(){
       })
       .attr('r', function(d){
         return rScale(d[1]);
-      })
-
+      });
 
     svg.append('g')
       .attr('class','axis')
@@ -788,27 +787,29 @@ visButton.addEventListener('click', function(){
       .text('Y-Axis: '+ yMetric);
 
     function responsivefy(svg){
-      var svg = svg;
+      
       //get container + svg aspect ratio
       var container = d3.select(svg.node().parentNode),
-        width = parseInt(svg.style('width')),
-        height = parseInt(svg.style('height')),
-        aspect = (width / height);
+        width = parseInt(svg.style("width")),
+        height = parseInt(svg.style("height")),
+        aspect = width/height;
 
       //add viewbox and preserveAspectRatio properties,
       //and call resize so that svg resizes on initial page load
 
-      svg.attr('viewbox','0 0 '+width+' '+height)
-        .attr('preserveAspectRatio', 'xMidYMid')
+      svg.attr("viewBox","0 0 "+width+" "+height)
+        .attr("preserveAspectRatio", "xMinYMid")
         .call(resize);
 
-      d3.select(window).on('resize.'+container.attr('id'), resize);
+      d3.select(window).on("resize."+container.attr("id"), resize);
 
+        
       //get width of container and resize svg to fit it
       function resize() {
-        var targetWidth = parseInt(container.style('width'));
-        svg.attr('width', targetWidth);
-        svg.attr('height', Math.round(targetWidth/aspect));
+        console.log('resize');
+        var targetWidth = parseInt(container.style("width"));
+        svg.attr("width", targetWidth);
+        svg.attr("height", Math.round(targetWidth / aspect));
       }//end resize
     }//end responsivefy
   }//end graphData 
