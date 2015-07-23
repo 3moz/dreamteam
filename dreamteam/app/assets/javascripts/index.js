@@ -28,7 +28,7 @@
   visArea.appendChild(visButton);
   visButton.setAttribute('disabled', true);
   visButton.setAttribute('class', "mdl-button mdl-js-button mdl-button--primary")
-  
+
   $('#p2').hide();
 
   var tables = [
@@ -614,8 +614,11 @@ visButton.addEventListener('click', function(){
     xTableArr.unshift('Select X-Axis Metric');
     yTableArr.unshift('Select Y-Axis Metric');
 
+
     visArea.appendChild(xAxSelector);
     visArea.appendChild(yAxSelector);
+
+    
 
     xTableArr.forEach(function(column){
       
@@ -694,8 +697,8 @@ visButton.addEventListener('click', function(){
 
     console.log(returnedObjects);
 
-    var h = 450;
-    var w = 850;
+    var h = 350;
+    var w = 1200;
 
     var padding = 50;
 

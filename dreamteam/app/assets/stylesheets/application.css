@@ -14,8 +14,12 @@
  *= require_self
  */
 
- .bubble{
-        fill-opacity: .5;
-        stroke: #fff;
-        stroke-width: .5px;
-      }
+.bubble{
+      fill-opacity: .5;
+      stroke: #fff;
+      stroke-width: .5px;
+    }
+
+h5{
+  text-align: center;
+}

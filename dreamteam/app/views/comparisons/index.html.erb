@@ -25,7 +25,7 @@
           <form method='POST' action='/session'>
             <input name='authenticity_token' value='<%= form_authenticity_token() %>' type='hidden'>
             <input name='_method' value='DELETE' type='hidden'><br>
-            <a class="mdl-navigation__link" id="logout" href='/sessions/new'>Log Out</a>
+            <a class="mdl-navigation__link" id="logout" href='/'>Log Out</a>
             <!-- <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent " id='logout'>Log Out</button> -->
           </form>
       </nav>
@@ -37,17 +37,17 @@
 
   <div id="p2" style='width:100%' class="mdl-progress mdl-js-progress mdl-progress__indeterminate "></div>
 
-  <h5>Create a New Comparison</h5>
+  <h5>select data to work with</h5>
 
-  <div id='selectArea'>
+  <div align='center' id='selectArea'>
   </div>
 
-  <h5>Visualizations</h5>
+  <h5>choose metrics to visualize</h5>
 
-  <div id='visArea'>
+  <div align='center' id='visArea'>
   </div>
 
-  <div id='graphArea'>
+  <div align='center' id='graphArea'>
   </div> 
 
   <!-- <form method='POST' action='/comparisons'>
