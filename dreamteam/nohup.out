@@ -1,0 +1,31 @@
+I, [2015-07-24T18:01:23.240793 #5678]  INFO -- : listening on addr=0.0.0.0:8080 fd=7
+I, [2015-07-24T18:01:23.241019 #5678]  INFO -- : worker=0 spawning...
+I, [2015-07-24T18:01:23.241994 #5678]  INFO -- : master process ready
+I, [2015-07-24T18:01:23.242694 #5680]  INFO -- : worker=0 spawned pid=5680
+I, [2015-07-24T18:01:23.242843 #5680]  INFO -- : Refreshing Gem list
+I, [2015-07-24T18:01:26.939284 #5680]  INFO -- : worker=0 ready
+208.185.23.206 - - [24/Jul/2015:18:01:50 -0400] "GET / HTTP/1.1" 500 52361 1.4562
+208.185.23.206 - - [24/Jul/2015:18:01:51 -0400] "GET %2Ffavicon.ico HTTP/1.1" 200 - 0.0015
+E, [2015-07-24T18:48:46.288131 #6231] ERROR -- : adding listener failed addr=0.0.0.0:8080 (in use)
+E, [2015-07-24T18:48:46.288425 #6231] ERROR -- : retrying in 0.5 seconds (4 tries left)
+E, [2015-07-24T18:48:46.788844 #6231] ERROR -- : adding listener failed addr=0.0.0.0:8080 (in use)
+E, [2015-07-24T18:48:46.788962 #6231] ERROR -- : retrying in 0.5 seconds (3 tries left)
+E, [2015-07-24T18:48:47.289331 #6231] ERROR -- : adding listener failed addr=0.0.0.0:8080 (in use)
+E, [2015-07-24T18:48:47.289452 #6231] ERROR -- : retrying in 0.5 seconds (2 tries left)
+E, [2015-07-24T18:48:47.789836 #6231] ERROR -- : adding listener failed addr=0.0.0.0:8080 (in use)
+E, [2015-07-24T18:48:47.789957 #6231] ERROR -- : retrying in 0.5 seconds (1 tries left)
+E, [2015-07-24T18:48:48.290308 #6231] ERROR -- : adding listener failed addr=0.0.0.0:8080 (in use)
+E, [2015-07-24T18:48:48.290426 #6231] ERROR -- : retrying in 0.5 seconds (0 tries left)
+E, [2015-07-24T18:48:48.790797 #6231] ERROR -- : adding listener failed addr=0.0.0.0:8080 (in use)
+/var/lib/gems/1.9.1/gems/unicorn-4.9.0/lib/unicorn/socket_helper.rb:185:in `bind': Address already in use - bind(2) (Errno::EADDRINUSE)
+	from /var/lib/gems/1.9.1/gems/unicorn-4.9.0/lib/unicorn/socket_helper.rb:185:in `new_tcp_server'
+	from /var/lib/gems/1.9.1/gems/unicorn-4.9.0/lib/unicorn/socket_helper.rb:165:in `bind_listen'
+	from /var/lib/gems/1.9.1/gems/unicorn-4.9.0/lib/unicorn/http_server.rb:242:in `listen'
+	from /var/lib/gems/1.9.1/gems/unicorn-4.9.0/lib/unicorn/http_server.rb:813:in `block in bind_new_listeners!'
+	from /var/lib/gems/1.9.1/gems/unicorn-4.9.0/lib/unicorn/http_server.rb:813:in `each'
+	from /var/lib/gems/1.9.1/gems/unicorn-4.9.0/lib/unicorn/http_server.rb:813:in `bind_new_listeners!'
+	from /var/lib/gems/1.9.1/gems/unicorn-4.9.0/lib/unicorn/http_server.rb:138:in `start'
+	from /var/lib/gems/1.9.1/gems/unicorn-4.9.0/bin/unicorn:126:in `<top (required)>'
+	from /usr/local/bin/unicorn:23:in `load'
+	from /usr/local/bin/unicorn:23:in `<main>'
+208.185.23.206 - - [24/Jul/2015:18:48:56 -0400] "GET / HTTP/1.1" 500 184667 1.6073
