@@ -1,7 +1,7 @@
 #coding: UTF-8
 
-# require 'CSV'
-# require 'open-uri'
+require 'CSV'
+require 'open-uri'
 
 
 namespace :import_players_csv do
