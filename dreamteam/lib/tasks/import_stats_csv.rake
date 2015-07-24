@@ -1,6 +1,6 @@
 #coding: UTF-8
 
-require 'CSV'
+require 'csv'
 require 'open-uri'
 
 
