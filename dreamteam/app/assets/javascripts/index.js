@@ -69,6 +69,10 @@
     valChoiceSelector.setAttribute('id','valChoiceSelector');
     selectArea.appendChild(valChoiceSelector);
 
+    var maxNote = document.createElement('span');
+    maxNote.setAttribute('id','maxNote');
+    selectArea.appendChild(maxNote);
+
     var progressBar = $(".mdl-js-progress");
 
     var statSelectorCreate = function(tableArr){
@@ -114,7 +118,7 @@
           visButtonValuesChecker();
         } else {
 
-          $('#p2').show();
+          $('#p2').show();//progress bar show
 
           visButtonValuesChecker();
 
@@ -122,7 +126,7 @@
           
           valueChoicesArr = [];
           valChoiceSelector.innerHTML = '';
-          
+                   
 
           var xhr = new XMLHttpRequest
           xhr.open('GET', location.origin+'/'+table+'.json');
@@ -150,7 +154,7 @@
               sortedUniqVals = uniqifiedValues.sort();
             } else if (typeof(uniqifiedValues[0])==='number'){
               sortedUniqVals = uniqifiedValues.sort(compare);
-            } 
+            }
 
             //.sort(compare) sorts numerical vals in an array according to compare (line 126)
             //.sort() sorts string according to ascii value of chars. 
@@ -171,14 +175,46 @@
               option.setAttribute('label', valChoice);
               valChoiceSelector.appendChild(option);
             });
-            $('#p2').hide();
+
+            //when user hovers over value selector dropdown, show max value for context
+
+            // $('select').hover(
+            //   function(){
+            //     $(this).append($("<span>max:</span>"));
+            //   }, function(){
+            //     $(this).find("span:last").remove();
+            //   }
+            // );
+            
+            $('#p2').hide();//progress bar hide
+
+            var max = Math.max.apply(null, sortedUniqVals);
+            maxNote.innerHTML = " max: "+max
+            selectArea.appendChild(maxNote);
+
           });
 
         xhr.send();
         
         }
-      });
-  }
+      });//end statSelector change listener
+  }//end tableSelector change listener
+
+
+  // var valMaxHoverCreate = function(maxVal){
+
+  //   console.log('hover');
+
+  //   var val = maxVal;
+
+  //   $('valChoiceSelector').hover(
+  //     function(){
+  //       $(this).append($("<span>max: "+val+"</span>"));
+  //     }, function(){
+  //       $(this).find("span:last").remove();
+  //     }
+  //   );//end hover function
+  // }//end valMaxHoverCreate
 
   var clearDropDowns = function(){
     document.getElementById('statSelector').remove();
@@ -187,6 +223,8 @@
     selectArea.removeChild(compareSelector);
     document.getElementById('valChoiceSelector').remove();
     selectArea.removeChild(valChoiceSelector);
+    document.getElementById('maxNote').remove();
+    selectArea.removeChild(maxNote);
     
   }
 
@@ -219,6 +257,7 @@
     document.getElementById('statSelector').remove();
     document.getElementById('compareSelector').remove();
     document.getElementById('valChoiceSelector').remove();
+    document.getElementById('maxNote').remove();
     visButton.setAttribute('disabled', true);      
 
 
@@ -239,6 +278,7 @@
     document.getElementById('statSelector').remove();
     document.getElementById('compareSelector').remove();
     document.getElementById('valChoiceSelector').remove();
+    document.getElementById('maxNote').remove();
     visButton.setAttribute('disabled', true);
 
 
@@ -267,6 +307,7 @@
     document.getElementById('statSelector').remove();
     document.getElementById('compareSelector').remove();
     document.getElementById('valChoiceSelector').remove();
+    document.getElementById('maxNote').remove();
     visButton.setAttribute('disabled', true);
 
 
@@ -318,6 +359,7 @@
     document.getElementById('statSelector').remove();
     document.getElementById('compareSelector').remove();
     document.getElementById('valChoiceSelector').remove();
+    document.getElementById('maxNote').remove();
     visButton.setAttribute('disabled', true);
 
 
@@ -358,6 +400,7 @@
     document.getElementById('statSelector').remove();
     document.getElementById('compareSelector').remove();
     document.getElementById('valChoiceSelector').remove();
+    document.getElementById('maxNote').remove();
     visButton.setAttribute('disabled', true);
 
 
@@ -396,6 +439,7 @@
     document.getElementById('statSelector').remove();
     document.getElementById('compareSelector').remove();
     document.getElementById('valChoiceSelector').remove();
+    document.getElementById('maxNote').remove();
     visButton.setAttribute('disabled', true);
 
 
@@ -436,6 +480,7 @@
     document.getElementById('statSelector').remove();
     document.getElementById('compareSelector').remove();
     document.getElementById('valChoiceSelector').remove();
+    document.getElementById('maxNote').remove();
     visButton.setAttribute('disabled', true);
 
 
@@ -473,6 +518,7 @@
     document.getElementById('statSelector').remove();
     document.getElementById('compareSelector').remove();
     document.getElementById('valChoiceSelector').remove();
+    document.getElementById('maxNote').remove();
     visButton.setAttribute('disabled', true);
 
 
@@ -513,6 +559,7 @@
     document.getElementById('statSelector').remove();
     document.getElementById('compareSelector').remove();
     document.getElementById('valChoiceSelector').remove();
+    document.getElementById('maxNote').remove();
     visButton.setAttribute('disabled', true);
 
 
@@ -539,6 +586,7 @@
     document.getElementById('statSelector').remove();
     document.getElementById('compareSelector').remove();
     document.getElementById('valChoiceSelector').remove();
+    document.getElementById('maxNote').remove();
     visButton.setAttribute('disabled', true);
 
 
@@ -566,6 +614,7 @@
     document.getElementById('statSelector').remove();
     document.getElementById('compareSelector').remove();
     document.getElementById('valChoiceSelector').remove();
+    document.getElementById('maxNote').remove();
     visButton.setAttribute('disabled', true);
 
 
@@ -663,10 +712,9 @@ visButton.addEventListener('click', function(){
         document.getElementById('visual').remove()
         // graphArea.removeChild('visual');
       }
-      $('#p2').show(); 
-    // document.getElementById('valChoiceSelector').remove();
-    // selectArea.removeChild(valChoiceSelector);
+      $('#p2').show(); //progress bar show
 
+    
       console.log("both axes selectors have values\n x-axis:"
         +xAxSelector.value+", y-axis:"+yAxSelector.value);
       
@@ -681,9 +729,12 @@ visButton.addEventListener('click', function(){
 
         graphData(response);//d3 visualization
        
-        $('#p2').hide();
+        $('#p2').hide();//progress bar hide
       });
       xhr.send();      
+
+      
+
     } else {console.log("one or more axis metrics still need to be specified");}
   }
 
@@ -764,7 +815,7 @@ visButton.addEventListener('click', function(){
       })
       .attr('r', function(d){
         return rScale(d[1]);
-      });
+      }); 
 
     svg.append('g')
       .attr('class','axis')
@@ -1132,6 +1183,12 @@ visButton.addEventListener('click', function(){
   });//the yAxis selector needs to have a value in order to know what metric the y axis measures
 
 });//end of vis button event listener
+
+  // var aboutButton = document.getElementById('about')
+  // aboutButton.addEventListener("click", function(){$("#aboutCard").fadeIn()});
+
+  // var okButton = document.getElementById('ok')
+  // okButton.addEventListener("click", function(){$("#aboutCard").fadeOut()});
 
 });//end of DOMCONTENTLOADED event listener
 

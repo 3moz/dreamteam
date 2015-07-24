@@ -9,13 +9,55 @@
   <!-- mobile -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <!-- MaterializeCSS -->
-  
-   <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css"> -->
+<!--   Bootstrap -->
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
            
 </head>
 
 <body>
+<!-- Bootstrap Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+      <!-- Google Card -->
+        <div class="mdl-card mdl-shadow--2dp demo-card-wide">
+          <div class="mdl-card__title">
+            <h6 class="mdl-card__title-text">about this application (especially the data)</h6>
+          </div>
+          <div class="mdl-card__supporting-text">
+          <!-- <h6 id="aboutData" >About This Application (especially the data)</h6> -->
+          <ul>
+            <li>Data graciously provided at no charge for research/educational purposes at <a href="http://basketballreference.com/stats_download.htm">databaseBasketball.com</a>. Data is as accurate as they have made it.</li>
+
+            <li>DreamTeam is intended as a research tool for basketball statistics. The data is from 1946-2009.</li>
+
+            <li>As not every metric offered in this application was tracked by the/a league in every one of those years, some data subsets will contain lots of zeros, and this will necessarily affect the visualizations sometimes.</li> 
+
+            <li>Some tables do not contain numerical data - non-numerical data will not show up in visualizations.</li> 
+
+            <li>DreamTeam has been constructed to allow maximum user flexibility in how a data visualization is built. Many visualizations - e.g.: field goals attempted (fga) vs. field goals made (fgm) - will make real-world basketball-sense. Others - e.g.: assists by the opposing team (d_asts) vs. personal fouls by the offense (o_pf) - arguably may not ... but you can still visualize them anyhow and draw your own conclusions from what you find.</li>
+
+          </ul>
+            Have fun!
+
+            -Eric
+
+          </div>
+          <div class="mdl-card__actions mdl-card--border">
+            <a data-dismiss="modal" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+              got it
+            </a>
+          </div>
+        </div>
+        <!-- end google card -->
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Bootstrap Modal -->
+
   <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
 
     <header class="mdl-layout__header">
@@ -26,7 +68,9 @@
         <div class="mdl-layout-spacer"></div>
           <nav class="mdl-navigation mdl-layout--large-screen-only">
           
-            <button id='about' class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent " id='logout'>about</button>
+            <button type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" data-toggle="modal" data-target="#myModal">
+              about
+            </button>
 
          
           </form>
@@ -38,7 +82,7 @@
     </header>
 
     <main class="mdl-layout__content">
-    <div class="page-content">
+    <div id='container' class="page-content">
 
     <div id="p2" style='width:100%' class="mdl-progress mdl-js-progress mdl-progress__indeterminate "></div>
 
@@ -51,22 +95,14 @@
 
     <div align='center' id='visArea'>
     </div>
-
+    
     <div align='center' id='graphArea'>
-    </div> 
+    </div>
 
     <form method='POST' action='/session'>
     <input name='authenticity_token' value='<%= form_authenticity_token() %>' type='hidden'>
     <input name='_method' value='DELETE' type='hidden'><br>
     <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent " id='logout'>Log Out</button>
-
-    <!-- <form method='POST' action='/comparisons'>
-
-      <label for='name'>Compare:</label>
-      <input name='comparison'>
-      <input name="authenticity_token" value="<%= form_authenticity_token() %>" type="hidden">
-      <button id='addComp'>Compare</button>
-    </form> -->
 
     </div>
   </div>  
@@ -78,8 +114,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
 <!-- JQuery -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-<!-- MaterializeCSS -->
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>  -->
+<!-- Bootstrap -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
 
 </body>
