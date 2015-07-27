@@ -16,8 +16,45 @@
 </head>
 
 <body>
-<!-- Bootstrap Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<!-- BootStrap How-To Modal -->
+<div class="modal fade" id="howToModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+      <!-- Google Card -->
+        <div class="mdl-card mdl-shadow--2dp demo-card-wide">
+          <div class="mdl-card__title">
+            <h6 class="mdl-card__title-text">how does this work?</h6>
+          </div>
+          <div class="mdl-card__supporting-text">
+          <!-- <h6 id="aboutData" >About This Application (especially the data)</h6> -->
+          <ul>
+            <li>In the first section, choose a subset of data to work with. For instance, if you wanted to study player careers with more than 5518 rebounds, select 'player_careers' from the 'select data' drop-down, 'reb' from the 'select metric' drop-down, '>' (more than) from the 'choose operation' drop-down, and 5518 from the values drop-down.</li>
+
+            <li>In the second section, choose basketball metrics to visualize. Click "Choose X and Y Axes" to specify along what metrics you'd like to visualize the data subset you've chosen. The choice of metrics for the x- and y-axes come from the data table you've chosen. </li>
+
+            <li>The visualization will re-render with changes to the x- and y-axes. If you adjust the data subset you're working with, click "Choose X and Y Axes" again to reset the axes choices. (In the future I may make the re-render of the visuals responsive as well to adjustments in the data subset dropdowns.)
+
+            <li>Using the player_regular_seasons table takes longer (or may not work) right now. This is a known issue I'm working on rectifying.</li>
+          </ul>
+            Have fun!
+
+            -Eric
+
+          </div>
+          <div class="mdl-card__actions mdl-card--border">
+            <a data-dismiss="modal" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+              got it
+            </a>
+          </div>
+        </div>
+        <!-- end google card -->
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Bootstrap About Modal -->
+<div class="modal fade" id="aboutModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-body">
@@ -66,17 +103,12 @@
         <span class="mdl-layout-title">DREAMTEAM</span>
         <!-- Add spacer, to align navigation to the right -->
         <div class="mdl-layout-spacer"></div>
-          <nav class="mdl-navigation mdl-layout--large-screen-only">
           
-            <button type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" data-toggle="modal" data-target="#myModal">
-              about
-            </button>
-
-         
-          </form>
-
-
+          <nav class="mdl-navigation mdl-layout--large-screen-only">
+            <a class="mdl-navigation__link" data-toggle="modal" data-target="#howToModal" href="">How To Use</a>
+            <a class="mdl-navigation__link" data-toggle="modal" data-target="#aboutModal" href="">About</a>
           </nav>
+
         </div>
 
     </header>
