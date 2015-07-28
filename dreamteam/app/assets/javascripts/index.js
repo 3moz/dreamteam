@@ -24,7 +24,7 @@
   var visArea = document.getElementById('visArea');
 
   var visButton = document.createElement('button');
-  visButton.innerHTML = "Visualize";
+  visButton.innerHTML = "Choose x and y axes";
   visArea.appendChild(visButton);
   visButton.setAttribute('disabled', true);
   visButton.setAttribute('class', "mdl-button mdl-js-button mdl-button--primary")
