@@ -16,6 +16,117 @@
 </head>
 
 <body>
+<!-- glossary modal -->
+<div class="modal fade" id="glossaryModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+      <!-- Google Card -->
+        <div class="mdl-card mdl-shadow--2dp demo-card-wide">
+          <div class="mdl-card__title">
+            <h6 class="mdl-card__title-text">what do all these abreviations mean?</h6>
+          </div>
+          <div class="mdl-card__supporting-text">
+          <ul>
+            <li>Data Tables</li>
+            <li>(everything here is regarding years from 1946-2009)</li>
+            <li>teams: all professional basketball teams that have existed</li>
+            <li>team_seasons: season performances for each team, each year</li>
+            <li>players: all professional basketball players that have ever played in at least the regular season</li>
+            <li>player_regular_seasons: aggregate season performances for each player, each year</li>
+            <li>player_playoffs_careers: aggregate career playoff performance for every player who played in the playoffs</li>
+            <li>player_playoffs: playoff performances of each player, each year</li>
+            <li>player_careers: aggregate career performances of each player<li>
+            <li>player_allstars: allstar game performances of each player, each year</li>
+            <li>drafts: draft information for every draft pick in history</li>
+            <li>coaches: all professional basketball coaches that heve ever coached in at least the regular season</li>
+            <li>coach_careers: aggregate career performance of each coach</li>
+          </ul>
+          <ul>
+            <li>Metrics</li>
+            <li>team_code: code assigned to each team in history</li>
+            <li>team_location: location of each team in history</li>
+            <li>team_name: name of each team in history</li>
+            <li>team_league: league of each team in history</li>
+            <li>year: year of a given season performance (regular season, playoffs, or all-star game</li>
+            <li>o_fgm: offensive field goals made</li>
+            <li>o_fga: offensive field goals attempted</li>
+            <li>o_ftm: offensive free throws made</li>
+            <li>o_fta: offensive free throws atttempted</li>
+            <li>o_oreb: offensive rebounds by the offense</li>
+            <li>o_dreb: defensive rebounds by the offense</li>
+            <li>o_asts: assists by the offense</li>
+            <li>o_pf: personal fouls by the offense</li>
+            <li>o_stl: steals by the offense</li>
+            <li>o_to: time outs by the offense</li>
+            <li>o_blk: blocks by the offense</li>
+            <li>o_3pm: 3-pointers made by the offense</li>
+            <li>o_3pa: 3-pointers attempted by the offense</li>
+            <li>o_pts: points scored by the offense<li>
+            <li>(all stats with  d_[something] are analogous to the above, except they capture what teams' opponents did)</li>
+            <li>pace: an estimate of the number of possessions by a team per 48 minutes - put another way, it's a measurement of how quickly an offense plays. learn more abot it <a href='http://www.basketball-reference.com/about/glossary.html#pace'>here</a>.
+            <li>won: games won in a season</li>
+            <li>lost: games lost in a season</li>
+            <li>player_code: code assigned to each player in history</li>
+            <li>first_name: player or coach first name</li>
+            <li>last_name: player or coach last name</li>
+            <li>position: position a player played (G - guard, F - forward, C - center)</li>
+            <li>first_season: first season a player played</li>
+            <li>last _season: last season a plauer played</li>
+            <li>height_ft: height in feet</li>
+            <li>height_in: height in inches</li>
+            <li>weight: officially listed playing weight</li>
+            <li>school: college or high-school a player came from before playing in the pros</li>
+            <li>b_day: when a player was born</li>
+            <li>gp: games played</li>
+            <li>minutes: minutes played</li>
+            <li>pts: points scored</li>
+            <li>dreb: defensive rebounds</li>
+            <li>oreb: offensive rebuonds</li>
+            <li>reb: total rebounds</li>
+            <li>asts: assists</li>
+            <li>stl: steals</li>
+            <li>blk: blocks</li>
+            <li>turnover: turnovers</li>
+            <li>pf: personal fouls</li>
+            <li>fga: field goals attempted</li>
+            <li>fgm: field goals made</li>
+            <li>fta: free-throws attempted</li>
+            <li>ftm: free-throws made</li>
+            <li>tpa: 3-pointers attempted</li>
+            <li>tpm: 3-pointers made</li>
+            <li>draft_year: year a draft occured</li>
+            <li>draft_round: draft round of a draft</li>
+            <li>selection: which pick in a round a draft was</li>
+            <li>drafted_from: what school/place a drafted player came from</li>
+            <li>league: what league a player was drafted into</li>
+            <li>coach_code: code assigned to each coach in history</li>
+            <li>year: year of a coach season performance</li>
+            <li>yr_order: order of which team a coach lead in a season. usually this = 1.</li>
+            <li>season_win: wins in a season</li>
+            <li>season_loss: losses in a season</li>
+            <li>playoff_win: playoff wins in a season</li>
+            <li>playoff_loss: playoff losses in a season</li>
+            <li>team: code of the team a coach coached in a season</li>
+          </ul>
+            Have fun!
+
+            -Eric
+
+          </div>
+          <div class="mdl-card__actions mdl-card--border">
+            <a data-dismiss="modal" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+              got it
+            </a>
+          </div>
+        </div>
+        <!-- end google card -->
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Bootstrap Modal -->
+
 <!-- BootStrap How-To Modal -->
 <div class="modal fade" id="howToModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
@@ -66,7 +177,7 @@
           <div class="mdl-card__supporting-text">
           <!-- <h6 id="aboutData" >About This Application (especially the data)</h6> -->
           <ul>
-            <li>Data graciously provided at no charge for research/educational purposes at <a href="http://basketballreference.com/stats_download.htm">databaseBasketball.com</a>. Data is as accurate as they have made it.</li>
+            <li>Data graciously provided at no charge for research/educational purposes at <a href="http://basketballreference.com/stats_download.htm">databaseBasketball.com</a>. Data is as accurate as they have made it. Learn more about the data itself <a href='http://basketballreference.com/about/aboutplayerstats.htm'>here</a>.</li>
 
             <li>DreamTeam is intended as a research tool for basketball statistics. The data is from 1946-2009.</li>
 
@@ -106,6 +217,7 @@
           
           <nav class="mdl-navigation mdl-layout--large-screen-only">
             <a class="mdl-navigation__link" data-toggle="modal" data-target="#howToModal" href="">How To Use</a>
+            <a class="mdl-navigation__link" data-toggle="modal" data-target="#glossaryModal" href="">Stats Glossary</a>
             <a class="mdl-navigation__link" data-toggle="modal" data-target="#aboutModal" href="">About</a>
           </nav>
 
