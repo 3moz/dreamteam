@@ -14,6 +14,10 @@
 
 -data visualizations for returned results using D3
 
+-responsiveness to changes in browser size / change to mobile browser
+
+-styling using Google Material Design Lite and Bootstrap
+
 **data graciously provided at no charge for research purposes at http://basketballreference.com/stats_download.htm**
 
 ##Coming features:
@@ -21,7 +25,5 @@
 -ability for user saved queries to persist per user, not for all users.
 
 -hit google news for topical items regarding what the user has queried for
-
--styling
 
 -analyze sports other than basketball
