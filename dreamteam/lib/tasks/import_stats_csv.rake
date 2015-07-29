@@ -113,8 +113,9 @@ namespace :import_player_regular_seasons_csv do
       fga: row[16],
       fgm: row[17],
       fta: row[18],
-      tpa: row[19],
-      tpm: row[20]
+      ftm: row[19],
+      tpa: row[20],
+      tpm: row[21]
       })
     end
   end
