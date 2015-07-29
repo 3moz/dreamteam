@@ -123,72 +123,44 @@
           visButtonValuesChecker();
 
           table = tableSelector.value;
+          metric = statSelector.value;
           
           valueChoicesArr = [];
           valChoiceSelector.innerHTML = '';
+
+          var query = 'select distinct '+metric+' from '+table+' order by '+metric+';';
                    
+          console.log(query);
 
           var xhr = new XMLHttpRequest
-          xhr.open('GET', location.origin+'/'+table+'.json');
+          xhr.open('GET', location.origin+'/'+table+'/'+query);
           xhr.addEventListener('load', function(){
             
             
-            response = JSON.parse(xhr.responseText);//JSON object of all returned records
+            response = JSON.parse(xhr.responseText);
+            //array of objects, each element of which is an object with one key:value pair, 
+            //where key:value::[metric][value]
 
-            metric = statSelector.value;
+            console.log(response);
+
+            // metric = statSelector.value;
 
             for (var i = 0; i < response.length; i++){
               valueChoicesArr.push(response[i][metric]);
             }
 
-            uniqifiedValues = valueChoicesArr.filter(function(val, i, valueChoicesArr){
-              return valueChoicesArr.indexOf(val)===i;
-            });//returns an array of unique values from valueChoicesArr
-
-            //define how two numeric elements will be compared in order for the uniqified array to be sorted 
-            function compare(a,b){
-              return a-b;
-            }
-
-            if (typeof(uniqifiedValues[0])==='string'){
-              sortedUniqVals = uniqifiedValues.sort();
-            } else if (typeof(uniqifiedValues[0])==='number'){
-              sortedUniqVals = uniqifiedValues.sort(compare);
-            }
-
-            //.sort(compare) sorts numerical vals in an array according to compare (line 126)
-            //.sort() sorts string according to ascii value of chars. 
-
-            console.log(valueChoicesArr); //all vals from db call, unsorted
-            console.log(valueChoicesArr.length+" total returned choices");
-            console.log(sortedUniqVals); //unique, sorted vals from db call --> placed in dropdown
-            console.log(sortedUniqVals.length+" unique choices sorted"); 
-            
-            //the above returns an array of unique, sorted values contained in the [metric] keys of [table]
-            //these will populate the value selector drop-down, below
-
             selectArea.appendChild(valChoiceSelector);
             
-            sortedUniqVals.forEach(function(valChoice){
+            valueChoicesArr.forEach(function(valChoice){
               var option = document.createElement('option');
               option.setAttribute('value', valChoice);
               option.setAttribute('label', valChoice);
               valChoiceSelector.appendChild(option);
             });
 
-            //when user hovers over value selector dropdown, show max value for context
-
-            // $('select').hover(
-            //   function(){
-            //     $(this).append($("<span>max:</span>"));
-            //   }, function(){
-            //     $(this).find("span:last").remove();
-            //   }
-            // );
-            
             $('#p2').hide();//progress bar hide
 
-            var max = Math.max.apply(null, sortedUniqVals);
+            var max = Math.max.apply(null, valueChoicesArr);
             maxNote.innerHTML = " max: "+max
             selectArea.appendChild(maxNote);
 
@@ -199,22 +171,6 @@
         }
       });//end statSelector change listener
   }//end tableSelector change listener
-
-
-  // var valMaxHoverCreate = function(maxVal){
-
-  //   console.log('hover');
-
-  //   var val = maxVal;
-
-  //   $('valChoiceSelector').hover(
-  //     function(){
-  //       $(this).append($("<span>max: "+val+"</span>"));
-  //     }, function(){
-  //       $(this).find("span:last").remove();
-  //     }
-  //   );//end hover function
-  // }//end valMaxHoverCreate
 
   var clearDropDowns = function(){
     document.getElementById('statSelector').remove();
@@ -688,22 +644,6 @@ visButton.addEventListener('click', function(){
 
   var axesValueCheck = function(){
     
-    tableSelector = document.getElementById('tableSelector');
-
-    var valChoice = '\''+valChoiceSelector.value+'\'' //get rid of char / num issue for SQL commands
-
-    var query = 'select * from '+ //build query
-    tableSelector.value+
-    ' where '+
-    statSelector.value+
-    ' '+
-    compareSelector.value+
-    ' '+
-    valChoice+
-    ';';
-
-    console.log(query);
-
     if ((xAxSelector.value&&yAxSelector.value)&&
       (xAxSelector.value!=="Select X-Axis Metric")&&
       (yAxSelector.value!=="Select Y-Axis Metric"))
@@ -712,26 +652,45 @@ visButton.addEventListener('click', function(){
         document.getElementById('visual').remove()
         // graphArea.removeChild('visual');
       }
-      $('#p2').show(); //progress bar show
+
+    tableSelector = document.getElementById('tableSelector');
+
+    var table = tableSelector.value;
+    var subSetMetric = statSelector.value
+    var xMetric = xAxSelector.value;
+    var yMetric = yAxSelector.value;
+    var operator = compareSelector.value;
+    var valChoice = '\''+valChoiceSelector.value+'\'' //get rid of char / num issue for SQL commands
+
+    var query = 'select '+
+    xMetric+', '+yMetric+
+    ' from '+table+
+    ' where '+subSetMetric+
+    ' '+operator+' '+
+    valChoice+';';
+
+    console.log(query);
+    
+    $('#p2').show(); //progress bar show
 
     
-      console.log("both axes selectors have values\n x-axis:"
-        +xAxSelector.value+", y-axis:"+yAxSelector.value);
+    console.log("both axes selectors have values\n x-axis:"
+      +xAxSelector.value+", y-axis:"+yAxSelector.value);
+
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', location.origin+'/'+tableSelector.value+'/'+query);
+    xhr.addEventListener('load', function(){
       
-      var xhr = new XMLHttpRequest();
-      xhr.open('GET', location.origin+'/'+tableSelector.value+'/'+query);
-      xhr.addEventListener('load', function(){
-        
 
-        response = JSON.parse(xhr.responseText);//JSON object of all returned records
+      response = JSON.parse(xhr.responseText);//JSON object of all returned records
 
-        console.log(response.length+" records returned");
+      console.log(response.length+" records returned");
 
-        graphData(response);//d3 visualization
-       
-        $('#p2').hide();//progress bar hide
-      });
-      xhr.send();      
+      graphData(response);//d3 visualization
+     
+      $('#p2').hide();//progress bar hide
+    });
+    xhr.send();      
 
       
 
